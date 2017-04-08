@@ -18,7 +18,7 @@ create table department(
 create table class(
 	class_id int(8) UNSIGNED not null primary key,
 	class_name varchar(15) not null,
-	class_department_id int(8) not null,
+	class_department_id int(8) UNSIGNED not null,
 	class_majorName varchar(20) not null,
 	class_information text null,
 	foreign key(class_department_id) references department(department_id)
