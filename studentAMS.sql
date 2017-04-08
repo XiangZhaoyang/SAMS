@@ -1,10 +1,26 @@
 create database studentAMS;
 
+use studentAMS;
+
 create table user(
 	user_id bigint(12) UNSIGNED not null primary key,
 	user_pass varchar(40) not null default '123456',
-	user_createTime datestamp default CURRENT_TIMESTAMP,
+	user_createTime timestamp default CURRENT_TIMESTAMP,
 	user_auth tinyint(1) not null default 1
+)engine=innodb default charset=utf8;
+
+create table class(
+	class_id int(8) UNSIGNED not null primary key,
+	class_name varchar(15) not null,
+	class_department_id int(8) not null,
+	class_majorName varchar(20) not null,
+	class_information text null
+)engine=innodb default charset=utf8;
+
+create table department(
+	department_id int(8) UNSIGNED not null primary key,
+	department_name varchar(10) not null,
+	department_information text null
 )engine=innodb default charset=utf8;
 
 create table studnet(
@@ -39,19 +55,6 @@ create table teacher(
 	foreign key(teacher_department_id) references department(department_id)
 )engine=innodb default charset=utf8;
 
-create table department(
-	department_id int(8) UNSIGNED not null primary key,
-	department_name varchar(10) not null,
-	department_information text null
-)engine=innodb default charset=utf8;
-
-create table class(
-	class_id int(8) UNSIGNED not null primary key,
-	class_name varchar(15) not null,
-	class_department_id int(8) not null,
-	class_majorName varchar(20) not null,
-	class_information text null
-)engine=innodb default charset=utf8;
 
 create table course(
 	course_id int(8) UNSIGNED not null primary key,
@@ -77,7 +80,7 @@ create table grade(
 	grade_pass tinyint(1) null,
 	grade_second float(3,2) null,
 	grade_information text null,
-	primary key(grade_course_id, grade_student_id),
-	foreign key(grade_course_id) references course(class_id),
-	foreign key(grade_student_id) references studnet(studnet_id)
+	foreign key(grade_course_id) references course(course_id),
+	foreign key(grade_student_id) references studnet(studnet_id),
+	primary key(grade_course_id, grade_student_id)
 )engine=innodb default charset=utf8;
