@@ -19,7 +19,7 @@ create table class(
 
 create table department(
 	department_id int(8) UNSIGNED not null primary key,
-	department_name varchar(10) not null,
+	department_name varchar(15) not null,
 	department_information text null
 )engine=innodb default charset=utf8;
 
@@ -64,6 +64,7 @@ create table course(
 	course_belong varchar(10) null,
 	course_style varchar(10) not null,
 	course_credit tinyint(1) not null,
+	course_name varchar(15) not null,
 	course_year char(9) not null,
 	course_term tinyint(1) not null,
 	course_information text null,
