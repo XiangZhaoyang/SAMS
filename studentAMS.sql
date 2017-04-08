@@ -9,18 +9,19 @@ create table user(
 	user_auth tinyint(1) not null default 1
 )engine=innodb default charset=utf8;
 
+create table department(
+	department_id int(8) UNSIGNED not null primary key,
+	department_name varchar(15) not null,
+	department_information text null
+)engine=innodb default charset=utf8;
+
 create table class(
 	class_id int(8) UNSIGNED not null primary key,
 	class_name varchar(15) not null,
 	class_department_id int(8) not null,
 	class_majorName varchar(20) not null,
-	class_information text null
-)engine=innodb default charset=utf8;
-
-create table department(
-	department_id int(8) UNSIGNED not null primary key,
-	department_name varchar(15) not null,
-	department_information text null
+	class_information text null,
+	foreign key(class_department_id) references department(department_id)
 )engine=innodb default charset=utf8;
 
 create table studnet(
