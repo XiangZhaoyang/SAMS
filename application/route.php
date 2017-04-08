@@ -9,6 +9,10 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
+use think\Route;
+
+Route::rule('hi/[:name]', 'index/index/hi');
+
 return [
     '__pattern__' => [
         'name' => '\w+',
@@ -17,5 +21,10 @@ return [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
     ],
+    // 添加路由规则 路由到 index控制器的hi操作方法
+    // 'hi/[:name]' => 'index/index/hi',
+    'test/[:name]' => function ($name) {
+    	return 'test,'.$name;
+    },
 
 ];
