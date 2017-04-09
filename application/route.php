@@ -16,6 +16,7 @@ Route::rule('hi/[:name]', 'index/index/hi');
 return [
     '__pattern__' => [
         'name' => '\w+',
+        'id'   => '\d+',
     ],
     '[hello]'     => [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
@@ -26,5 +27,12 @@ return [
     'test/[:name]' => function ($name) {
     	return 'test,'.$name;
     },
+    'user/index'     => 'index/user/index',
+    'user/create'    => 'index/user/create',
+    'user/add'       => 'index/user/add',
+    'user/add_list'  => 'index/user/addList',
+    'user/update/:id'=> 'index/user/update',
+    'user/delete/:id'=> 'index/user/delete',
+    'user/:id'       => 'index/user/read'
 
 ];
