@@ -27,4 +27,14 @@ return [
     	return 'test,'.$name;
     },
 
+    // 'blog/:year/:month' => ['index/blog/archive', ['method' => 'get'], ['year' => '\d{4}', 'month' => '\d{2}']],
+    // 'blog/:id' => ['index/blog/get', ['method' => 'get'], ['id' => '\d+']],
+    // 'blog/:name' => ['index/blog/read', ['method' => 'get'], ['name' => '\w+']],
+
+    '[blog]' => [
+        'blog-<year>-<month>' => ['index/blog/archive', ['method' => 'get'], ['year' => '\d{4}', 'month' => '\d{2}']],
+        ':id' => ['index/blog/get', ['method' => 'get'], ['id' => '\d+']],
+        ':name' => ['index/blog/read', ['method' => 'get'], ['name' => '\w+']],
+    ],
+
 ];
