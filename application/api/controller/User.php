@@ -8,7 +8,7 @@ use app\api\model\Teacher as TeacherModel;
 class User
 {
 	// 获取用户信息
-	public function index()
+	public function indexList()
 	{
 		$list = UserModel::all();
 		return json_return($list);
@@ -18,7 +18,11 @@ class User
 	public function read($id)
 	{
 		$user = UserModel::get($id);
-		return json_return($user);
+		if ($user) {
+			return json_return($user, '用户查询成功', 1);
+		} else {
+			return json_return($user, '用户查询失败', 0);
+		}
 	}
 
 	// 根据id删除用户
@@ -28,6 +32,13 @@ class User
 
 		if ($user->user_auth === 2) {
 			$teacher = TeacherModel::get($id);
+			if (!$teacher) {
+				$rt = $user->delete();
+				if ($rt) {
+					return json_return($rt, '教师用户删除成功', 1);
+				}
+				return json_return($rt, '教师用户删除失败', 0);
+			}
 			$trt = $teacher->delete();
 			if ($trt) {
 				$rt = $user->delete();
@@ -38,10 +49,16 @@ class User
 			} else {
 				return json_return($trt, '教师用户删除失败', 0);
 			}
-		}
-
-		if ($user->user_auth === 3) {
+		} elseif ($user->user_auth === 3) {
 			$student = StudentModel::get($id);
+			if (!$student) {
+				$rt = $user->delete();
+				if ($rt) {
+					return json_return($rt, '学生用户删除成功', 1);
+				} else {
+					return json_return($rt, '学生用户删除失败', 0);
+				}
+			}
 			$srt = $student->delete();
 			if ($srt) {
 				$rt = $user->delete();
@@ -53,17 +70,18 @@ class User
 			} else {
 				return json_return($srt, '学生用户删除失败', 0);
 			}
-		}
-
-		if ($user->user_auth === 1) {
+		} elseif ($user->user_auth === 1) {
 			return json_return($rt, '不能删除管理员用户', 0);
 		}
 	}
 
 	// 根据id修改密码
-	public function updete($id)
+	public function update($id)
 	{
 		$user = UserModel::get($id);
+		if (!$user) {
+			return json_return(null, '不存在此用户', 0);
+		}
 		$user->user_pass = input('put.pass');
 		$rt = $user->save();
 		if ($rt) {
@@ -76,9 +94,13 @@ class User
 	// 添加用户
 	public function add()
 	{
+		$user_id = UserModel::get(input('post.user_id'));
+		if ($user_id) {
+			return json_return(null, '用户已存在，添加失败', 0);
+		}
 		$user = new UserModel;
-		if ($user->allowField(ture)->save(input('post.'))) {
-			return json_return($user->id, '用户添加成功', 1);
+		if ($user->allowField(true)->save(input('post.'))) {
+			return json_return($user->user_id, '用户添加成功', 1);
 		} else {
 			return json_return(null, '用户添加失败', 0);
 		}

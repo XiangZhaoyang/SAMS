@@ -24,20 +24,20 @@ create table class(
 	foreign key(class_department_id) references department(department_id)
 )engine=innodb default charset=utf8;
 
-create table studnet(
-	studnet_id bigint(12) UNSIGNED not null primary key,
-	studnet_class_id int(8) UNSIGNED not null,
-	studnet_sex tinyint(1) not null,
-	studnet_name varchar(10) not null,
-	studnet_brith char(8) null,
-	studnet_address varchar(30) null,
-	studnet_imghref varchar(20) null,
-	studnet_information text null,
-	studnet_phoneNum bigint(11) null,
-	studnet_email varchar(30) null,
-	studnet_idcard bigint(18) null,
-	foreign key(studnet_id) references user(user_id),
-	foreign key(studnet_class_id) references class(class_id)
+create table student(
+	student_id bigint(12) UNSIGNED not null primary key,
+	student_class_id int(8) UNSIGNED not null,
+	student_sex tinyint(1) not null,
+	student_name varchar(10) not null,
+	student_brith char(8) null,
+	student_address varchar(30) null,
+	student_imghref varchar(20) null,
+	student_information text null,
+	student_phoneNum bigint(11) null,
+	student_email varchar(30) null,
+	student_idcard bigint(18) null,
+	foreign key(student_id) references user(user_id),
+	foreign key(student_class_id) references class(class_id)
 )engine=innodb default charset=utf8;
 
 create table teacher(
@@ -83,6 +83,6 @@ create table grade(
 	grade_second float(3,2) null,
 	grade_information text null,
 	foreign key(grade_course_id) references course(course_id),
-	foreign key(grade_student_id) references studnet(studnet_id),
+	foreign key(grade_student_id) references student(student_id),
 	primary key(grade_course_id, grade_student_id)
 )engine=innodb default charset=utf8;
