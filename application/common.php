@@ -10,3 +10,10 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+
+// api返回格式函数
+function json_return($data = null, $message = '' , $code = 1, $url = '')
+{
+	$dataR = ['date' => $data, 'message' => $message, 'code' => $code, 'url' => $url];
+	return json($dataR);
+}
