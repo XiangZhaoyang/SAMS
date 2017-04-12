@@ -108,28 +108,28 @@ CREATE TABLE `grade` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `studnet`
+-- 表的结构 `student`
 --
 
-CREATE TABLE `studnet` (
-  `studnet_id` bigint(12) UNSIGNED NOT NULL,
-  `studnet_class_id` int(8) UNSIGNED NOT NULL,
-  `studnet_sex` tinyint(1) NOT NULL,
-  `studnet_name` varchar(10) NOT NULL,
-  `studnet_brith` char(8) DEFAULT NULL,
-  `studnet_address` varchar(30) DEFAULT NULL,
-  `studnet_imghref` varchar(20) DEFAULT NULL,
-  `studnet_information` text,
-  `studnet_phoneNum` bigint(11) DEFAULT NULL,
-  `studnet_email` varchar(30) DEFAULT NULL,
-  `studnet_idcard` bigint(18) DEFAULT NULL
+CREATE TABLE `student` (
+  `student_id` bigint(12) UNSIGNED NOT NULL,
+  `student_class_id` int(8) UNSIGNED NOT NULL,
+  `student_sex` tinyint(1) NOT NULL,
+  `student_name` varchar(10) NOT NULL,
+  `student_brith` char(8) DEFAULT NULL,
+  `student_address` varchar(30) DEFAULT NULL,
+  `student_imghref` varchar(20) DEFAULT NULL,
+  `student_information` text,
+  `student_phoneNum` bigint(11) DEFAULT NULL,
+  `student_email` varchar(30) DEFAULT NULL,
+  `student_idcard` bigint(18) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `studnet`
+-- 转存表中的数据 `student`
 --
 
-INSERT INTO `studnet` (`studnet_id`, `studnet_class_id`, `studnet_sex`, `studnet_name`, `studnet_brith`, `studnet_address`, `studnet_imghref`, `studnet_information`, `studnet_phoneNum`, `studnet_email`, `studnet_idcard`) VALUES
+INSERT INTO `student` (`student_id`, `student_class_id`, `student_sex`, `student_name`, `student_brith`, `student_address`, `student_imghref`, `student_information`, `student_phoneNum`, `student_email`, `student_idcard`) VALUES
 (201301094134, 10000001, 1, '向阳', '19941117', '重庆', NULL, NULL, 15351311517, 'xyang@outllok.com', 5001000199411178097);
 
 -- --------------------------------------------------------
@@ -215,11 +215,11 @@ ALTER TABLE `grade`
   ADD KEY `grade_student_id` (`grade_student_id`);
 
 --
--- Indexes for table `studnet`
+-- Indexes for table `student`
 --
-ALTER TABLE `studnet`
-  ADD PRIMARY KEY (`studnet_id`),
-  ADD KEY `studnet_class_id` (`studnet_class_id`);
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`student_id`),
+  ADD KEY `student_class_id` (`student_class_id`);
 
 --
 -- Indexes for table `teacher`
@@ -257,14 +257,14 @@ ALTER TABLE `course`
 --
 ALTER TABLE `grade`
   ADD CONSTRAINT `grade_ibfk_1` FOREIGN KEY (`grade_course_id`) REFERENCES `course` (`course_id`),
-  ADD CONSTRAINT `grade_ibfk_2` FOREIGN KEY (`grade_student_id`) REFERENCES `studnet` (`studnet_id`);
+  ADD CONSTRAINT `grade_ibfk_2` FOREIGN KEY (`grade_student_id`) REFERENCES `student` (`student_id`);
 
 --
--- 限制表 `studnet`
+-- 限制表 `student`
 --
-ALTER TABLE `studnet`
-  ADD CONSTRAINT `studnet_ibfk_1` FOREIGN KEY (`studnet_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `studnet_ibfk_2` FOREIGN KEY (`studnet_class_id`) REFERENCES `class` (`class_id`);
+ALTER TABLE `student`
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`student_class_id`) REFERENCES `class` (`class_id`);
 
 --
 -- 限制表 `teacher`
