@@ -15,18 +15,18 @@ create table department(
 	department_information text null
 )engine=innodb default charset=utf8;
 
-create table class(
-	class_id int(8) UNSIGNED not null primary key,
-	class_name varchar(15) not null,
-	class_department_id int(8) UNSIGNED not null,
-	class_majorName varchar(20) not null,
-	class_information text null,
-	foreign key(class_department_id) references department(department_id)
+create table classes(
+	classes_id int(8) UNSIGNED not null primary key,
+	classes_name varchar(15) not null,
+	classes_department_id int(8) UNSIGNED not null,
+	classes_majorName varchar(20) not null,
+	classes_information text null,
+	foreign key(classes_department_id) references department(department_id)
 )engine=innodb default charset=utf8;
 
 create table student(
 	student_id bigint(12) UNSIGNED not null primary key,
-	student_class_id int(8) UNSIGNED not null,
+	student_classes_id int(8) UNSIGNED not null,
 	student_sex tinyint(1) not null,
 	student_name varchar(10) not null,
 	student_brith char(8) null,
@@ -37,7 +37,7 @@ create table student(
 	student_email varchar(30) null,
 	student_idcard bigint(18) null,
 	foreign key(student_id) references user(user_id),
-	foreign key(student_class_id) references class(class_id)
+	foreign key(student_classes_id) references classes(classes_id)
 )engine=innodb default charset=utf8;
 
 create table teacher(
@@ -60,7 +60,7 @@ create table teacher(
 create table course(
 	course_id int(8) UNSIGNED not null primary key,
 	course_teacher_id bigint(12) UNSIGNED not null,
-	course_class_id int(8) UNSIGNED not null,
+	course_classes_id int(8) UNSIGNED not null,
 	course_department_id int(8) UNSIGNED not null,
 	course_belong varchar(10) null,
 	course_style varchar(10) not null,
@@ -70,19 +70,19 @@ create table course(
 	course_term tinyint(1) not null,
 	course_information text null,
 	foreign key(course_teacher_id) references teacher(teacher_id),
-	foreign key(course_class_id) references class(class_id),
+	foreign key(course_classes_id) references classes(classes_id),
 	foreign key(course_department_id) references department(department_id)
 )engine=innodb default charset=utf8;
 
-create table grade(
-	grade_course_id int(8) UNSIGNED not null,
-	grade_student_id bigint(12) UNSIGNED not null,
-	grade_score float(3,2) null,
-	grade_gpa float(1,1) null,
-	grade_pass tinyint(1) null,
-	grade_second float(3,2) null,
-	grade_information text null,
-	foreign key(grade_course_id) references course(course_id),
-	foreign key(grade_student_id) references student(student_id),
-	primary key(grade_course_id, grade_student_id)
+create table score(
+	score_course_id int(8) UNSIGNED not null,
+	score_student_id bigint(12) UNSIGNED not null,
+	score_score float(3,2) null,
+	score_gpa float(1,1) null,
+	score_pass tinyint(1) null,
+	score_second float(3,2) null,
+	score_information text null,
+	foreign key(score_course_id) references course(course_id),
+	foreign key(score_student_id) references student(student_id),
+	primary key(score_course_id, score_student_id)
 )engine=innodb default charset=utf8;

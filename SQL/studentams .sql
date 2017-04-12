@@ -25,22 +25,22 @@ USE `studentams`;
 -- --------------------------------------------------------
 
 --
--- 表的结构 `class`
+-- 表的结构 `classes`
 --
 
-CREATE TABLE `class` (
-  `class_id` int(8) UNSIGNED NOT NULL,
-  `class_name` varchar(15) NOT NULL,
-  `class_department_id` int(8) UNSIGNED NOT NULL,
-  `class_majorName` varchar(20) NOT NULL,
-  `class_information` text
+CREATE TABLE `classes` (
+  `classes_id` int(8) UNSIGNED NOT NULL,
+  `classes_name` varchar(15) NOT NULL,
+  `classes_department_id` int(8) UNSIGNED NOT NULL,
+  `classes_majorName` varchar(20) NOT NULL,
+  `classes_information` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `class`
+-- 转存表中的数据 `classes`
 --
 
-INSERT INTO `class` (`class_id`, `class_name`, `class_department_id`, `class_majorName`, `class_information`) VALUES
+INSERT INTO `classes` (`classes_id`, `classes_name`, `classes_department_id`, `classes_majorName`, `classes_information`) VALUES
 (10000001, '信息系统与信息管理1班', 10101010, '信息管理与信息系统', NULL);
 
 -- --------------------------------------------------------
@@ -52,7 +52,7 @@ INSERT INTO `class` (`class_id`, `class_name`, `class_department_id`, `class_maj
 CREATE TABLE `course` (
   `course_id` int(8) UNSIGNED NOT NULL,
   `course_teacher_id` bigint(12) UNSIGNED NOT NULL,
-  `course_class_id` int(8) UNSIGNED NOT NULL,
+  `course_classes_id` int(8) UNSIGNED NOT NULL,
   `course_department_id` int(8) UNSIGNED NOT NULL,
   `course_belong` varchar(10) DEFAULT NULL,
   `course_style` varchar(10) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE `course` (
 -- 转存表中的数据 `course`
 --
 
-INSERT INTO `course` (`course_id`, `course_teacher_id`, `course_class_id`, `course_department_id`, `course_belong`, `course_style`, `course_credit`, `course_name`, `course_year`, `course_term`, `course_information`) VALUES
+INSERT INTO `course` (`course_id`, `course_teacher_id`, `course_classes_id`, `course_department_id`, `course_belong`, `course_style`, `course_credit`, `course_name`, `course_year`, `course_term`, `course_information`) VALUES
 (21212121, 200120012001, 10000001, 10101010, NULL, '专业必修', 3, 'C语言', '2013-2014', 2, NULL);
 
 -- --------------------------------------------------------
@@ -92,17 +92,17 @@ INSERT INTO `department` (`department_id`, `department_name`, `department_inform
 -- --------------------------------------------------------
 
 --
--- 表的结构 `grade`
+-- 表的结构 `score`
 --
 
-CREATE TABLE `grade` (
-  `grade_course_id` int(8) UNSIGNED NOT NULL,
-  `grade_student_id` bigint(12) UNSIGNED NOT NULL,
-  `grade_score` float(3,2) DEFAULT NULL,
-  `grade_gpa` float(1,1) DEFAULT NULL,
-  `grade_pass` tinyint(1) DEFAULT NULL,
-  `grade_second` float(3,2) DEFAULT NULL,
-  `grade_information` text
+CREATE TABLE `score` (
+  `score_course_id` int(8) UNSIGNED NOT NULL,
+  `score_student_id` bigint(12) UNSIGNED NOT NULL,
+  `score_score` float(3,2) DEFAULT NULL,
+  `score_gpa` float(1,1) DEFAULT NULL,
+  `score_pass` tinyint(1) DEFAULT NULL,
+  `score_second` float(3,2) DEFAULT NULL,
+  `score_information` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -113,7 +113,7 @@ CREATE TABLE `grade` (
 
 CREATE TABLE `student` (
   `student_id` bigint(12) UNSIGNED NOT NULL,
-  `student_class_id` int(8) UNSIGNED NOT NULL,
+  `student_classes_id` int(8) UNSIGNED NOT NULL,
   `student_sex` tinyint(1) NOT NULL,
   `student_name` varchar(10) NOT NULL,
   `student_brith` char(8) DEFAULT NULL,
@@ -129,7 +129,7 @@ CREATE TABLE `student` (
 -- 转存表中的数据 `student`
 --
 
-INSERT INTO `student` (`student_id`, `student_class_id`, `student_sex`, `student_name`, `student_brith`, `student_address`, `student_imghref`, `student_information`, `student_phoneNum`, `student_email`, `student_idcard`) VALUES
+INSERT INTO `student` (`student_id`, `student_classes_id`, `student_sex`, `student_name`, `student_brith`, `student_address`, `student_imghref`, `student_information`, `student_phoneNum`, `student_email`, `student_idcard`) VALUES
 (201301094134, 10000001, 1, '向阳', '19941117', '重庆', NULL, NULL, 15351311517, 'xyang@outllok.com', 5001000199411178097);
 
 -- --------------------------------------------------------
@@ -186,11 +186,11 @@ INSERT INTO `user` (`user_id`, `user_pass`, `user_createTime`, `user_auth`) VALU
 --
 
 --
--- Indexes for table `class`
+-- Indexes for table `classes`
 --
-ALTER TABLE `class`
-  ADD PRIMARY KEY (`class_id`),
-  ADD KEY `class_department_id` (`class_department_id`);
+ALTER TABLE `classes`
+  ADD PRIMARY KEY (`classes_id`),
+  ADD KEY `classes_department_id` (`classes_department_id`);
 
 --
 -- Indexes for table `course`
@@ -198,7 +198,7 @@ ALTER TABLE `class`
 ALTER TABLE `course`
   ADD PRIMARY KEY (`course_id`),
   ADD KEY `course_teacher_id` (`course_teacher_id`),
-  ADD KEY `course_class_id` (`course_class_id`),
+  ADD KEY `course_classes_id` (`course_classes_id`),
   ADD KEY `course_department_id` (`course_department_id`);
 
 --
@@ -208,18 +208,18 @@ ALTER TABLE `department`
   ADD PRIMARY KEY (`department_id`);
 
 --
--- Indexes for table `grade`
+-- Indexes for table `score`
 --
-ALTER TABLE `grade`
-  ADD PRIMARY KEY (`grade_course_id`,`grade_student_id`),
-  ADD KEY `grade_student_id` (`grade_student_id`);
+ALTER TABLE `score`
+  ADD PRIMARY KEY (`score_course_id`,`score_student_id`),
+  ADD KEY `score_student_id` (`score_student_id`);
 
 --
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`student_id`),
-  ADD KEY `student_class_id` (`student_class_id`);
+  ADD KEY `student_classes_id` (`student_classes_id`);
 
 --
 -- Indexes for table `teacher`
@@ -239,32 +239,32 @@ ALTER TABLE `user`
 --
 
 --
--- 限制表 `class`
+-- 限制表 `classes`
 --
-ALTER TABLE `class`
-  ADD CONSTRAINT `class_ibfk_1` FOREIGN KEY (`class_department_id`) REFERENCES `department` (`department_id`);
+ALTER TABLE `classes`
+  ADD CONSTRAINT `classes_ibfk_1` FOREIGN KEY (`classes_department_id`) REFERENCES `department` (`department_id`);
 
 --
 -- 限制表 `course`
 --
 ALTER TABLE `course`
   ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`course_teacher_id`) REFERENCES `teacher` (`teacher_id`),
-  ADD CONSTRAINT `course_ibfk_2` FOREIGN KEY (`course_class_id`) REFERENCES `class` (`class_id`),
+  ADD CONSTRAINT `course_ibfk_2` FOREIGN KEY (`course_classes_id`) REFERENCES `classes` (`classes_id`),
   ADD CONSTRAINT `course_ibfk_3` FOREIGN KEY (`course_department_id`) REFERENCES `department` (`department_id`);
 
 --
--- 限制表 `grade`
+-- 限制表 `score`
 --
-ALTER TABLE `grade`
-  ADD CONSTRAINT `grade_ibfk_1` FOREIGN KEY (`grade_course_id`) REFERENCES `course` (`course_id`),
-  ADD CONSTRAINT `grade_ibfk_2` FOREIGN KEY (`grade_student_id`) REFERENCES `student` (`student_id`);
+ALTER TABLE `score`
+  ADD CONSTRAINT `score_ibfk_1` FOREIGN KEY (`score_course_id`) REFERENCES `course` (`course_id`),
+  ADD CONSTRAINT `score_ibfk_2` FOREIGN KEY (`score_student_id`) REFERENCES `student` (`student_id`);
 
 --
 -- 限制表 `student`
 --
 ALTER TABLE `student`
   ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`student_class_id`) REFERENCES `class` (`class_id`);
+  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`student_classes_id`) REFERENCES `classes` (`classes_id`);
 
 --
 -- 限制表 `teacher`

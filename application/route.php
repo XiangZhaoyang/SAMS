@@ -25,12 +25,12 @@ return [
         '/delete/:id'    => ['api/user/delete', ['method' => 'delete']],
     ],
 
-    '[api/class]'           => [
-        '/index'        => ['api/class/indexList', ['method' => 'get']],
-        ':id'           => ['api/class/read', ['method' => 'get']],
-        '/add'          => ['api/class/add', ['method' => 'post']],
-        '/update/:id'   => ['api/class/update', ['method' => 'put']],
-        '/delete/:id'    => ['api/class/delete', ['method' => 'delete']],
+    '[api/classes]'           => [
+        '/index'        => ['api/classes/indexList', ['method' => 'get']],
+        ':id'           => ['api/classes/read', ['method' => 'get']],
+        '/add'          => ['api/classes/add', ['method' => 'post']],
+        '/update/:id'   => ['api/classes/update', ['method' => 'put']],
+        '/delete/:id'    => ['api/classes/delete', ['method' => 'delete']],
     ],
 
     '[api/course]'           => [
@@ -49,12 +49,12 @@ return [
         '/delete/:id'    => ['api/department/delete', ['method' => 'delete']],
     ],
 
-    '[api/grade]'           => [
-        '/index'        => ['api/grade/indexList', ['method' => 'get']],
-        ':id'           => ['api/grade/read', ['method' => 'get']],
-        '/add'          => ['api/grade/add', ['method' => 'post']],
-        '/update/:id'   => ['api/grade/update', ['method' => 'put']],
-        '/delete/:id'    => ['api/grade/delete', ['method' => 'delete']],
+    '[api/score]'           => [
+        '/index'        => ['api/score/indexList', ['method' => 'get']],
+        ':id'           => ['api/score/read', ['method' => 'get']],
+        '/add'          => ['api/score/add', ['method' => 'post']],
+        '/update/:id'   => ['api/score/update', ['method' => 'put']],
+        '/delete/:id'    => ['api/score/delete', ['method' => 'delete']],
     ],
 
     '[api/student]'           => [

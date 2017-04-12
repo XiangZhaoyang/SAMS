@@ -3,7 +3,7 @@ namespace app\api\validate;
 
 use think\Validate;
 
-class Class extends Validate
+class Score extends Validate
 {
 	// ;
 }

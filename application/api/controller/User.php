@@ -98,8 +98,8 @@ class User
 	// 添加用户
 	public function add()
 	{
-		$user_id = UserModel::get(input('post.user_id'));
-		if ($user_id) {
+		$user = UserModel::get(input('post.user_id'));
+		if ($user) {
 			return json_return(null, '用户已存在，添加失败', 0);
 		}
 		$user = new UserModel;
