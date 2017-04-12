@@ -11,7 +11,11 @@ class User
 	public function indexList()
 	{
 		$list = UserModel::all();
-		return json_return($list);
+		if ($list) {
+			return json_return($list, '用户信息查询成功', 1);
+		} else {
+			return json_return(null, '用户信息查询失败', 0);
+		}
 	}
 
 	// 根据id获取用户信息
