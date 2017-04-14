@@ -51,10 +51,10 @@ return [
 
     '[api/score]'           => [
         '/index'        => ['api/score/indexList', ['method' => 'get']],
-        ':id'           => ['api/score/read', ['method' => 'get']],
+        '/:sid/:cid'           => ['api/score/read', ['method' => 'get']],
         '/add'          => ['api/score/add', ['method' => 'post']],
-        '/update/:id'   => ['api/score/update', ['method' => 'put']],
-        '/delete/:id'    => ['api/score/delete', ['method' => 'delete']],
+        '/update/:sid/:cid'   => ['api/score/update', ['method' => 'put']],
+        '/delete/:sid/:cid'    => ['api/score/delete', ['method' => 'delete']],
     ],
 
     '[api/student]'           => [
