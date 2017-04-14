@@ -77,8 +77,8 @@ create table course(
 create table score(
 	score_course_id int(8) UNSIGNED not null,
 	score_student_id bigint(12) UNSIGNED not null,
-	score_score float(3,2) null,
-	score_gpa float(1,1) null,
+	score_score float(5,2) null,
+	score_gpa float(2,1) null,
 	score_pass tinyint(1) null,
 	score_second float(3,2) null,
 	score_information text null,

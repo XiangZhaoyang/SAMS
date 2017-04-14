@@ -15,6 +15,8 @@ return [
     '__pattern__' => [
         'name' => '\w+',
         'id'   => '\d+',
+        'sid'  => '\d+',
+        'cid'  => '\d+',
     ],
 
     '[api/user]'            => [

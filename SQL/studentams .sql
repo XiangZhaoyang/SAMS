@@ -98,8 +98,8 @@ INSERT INTO `department` (`department_id`, `department_name`, `department_inform
 CREATE TABLE `score` (
   `score_course_id` int(8) UNSIGNED NOT NULL,
   `score_student_id` bigint(12) UNSIGNED NOT NULL,
-  `score_score` float(3,2) DEFAULT NULL,
-  `score_gpa` float(1,1) DEFAULT NULL,
+  `score_score` float(5,2) DEFAULT NULL,
+  `score_gpa` float(2,1) DEFAULT NULL,
   `score_pass` tinyint(1) DEFAULT NULL,
   `score_second` float(3,2) DEFAULT NULL,
   `score_information` text
