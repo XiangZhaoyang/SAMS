@@ -9,7 +9,7 @@ class Index extends Controller
 {
     public function index()
     {
-        return 'index';
+        return 'hollo';
     }
 
     public function test($name = '')
