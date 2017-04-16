@@ -2,8 +2,10 @@
 namespace app\api\controller;
 
 use app\api\model\Teacher as TeacherModel;
+use app\api\controller\Base;
 
-class Teacher{
+class Teacher extends Base;
+{
 	// 查询教师列表信息
 	public function indexList()
 	{

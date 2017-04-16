@@ -2,8 +2,9 @@
 namespace app\api\controller;
 
 use app\api\model\Student as StudentModel;
+use app\api\controller\Base;
 
-class Student
+class Student extends Base;
 {
 	// 获取学生列表信息
 	public function indexList()

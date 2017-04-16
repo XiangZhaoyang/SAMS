@@ -2,32 +2,53 @@
 namespace app\api\controller;
 
 use app\api\model\Department as DepartmentModel;
+use app\api\controller\Base;
 
-class Department
+class Department extends Base;
 {
+	//调用父类构造函数
+	function __construct()
+	{
+		parent::__construct();
+	}
+
 	//增加系
 	public function add()
 	{
-		$department_id = DepartmentModel::get(input('post.department_id'));
-		if ($department_id) {
-			return json_return(null, '系已存在，添加失败', 0);
+		if (!$this->userId) {
+			return json_return(null, '用户未登录，系信息添加失败');
 		}
-		$department = new DepartmentModel;
-		if ($department->allowField(true)->save(input('post.'))) {
-			return json_return($department->department_id, '系信息添加成功', 1);
+		if ($this->userAuth == 1) {
+			$department_id = DepartmentModel::get(input('post.department_id'));
+			if ($department_id) {
+				return json_return(null, '系已存在，添加失败', 0);
+			}
+			$department = new DepartmentModel;
+			if ($department->allowField(true)->save(input('post.'))) {
+				return json_return($department->department_id, '系信息添加成功', 1);
+			} else {
+				return json_return(null, '系信息添加失败', 0);
+			}
 		} else {
-			return json_return(null, '系信息添加失败', 0);
+			return json_return(null, '用户权限不够，系信息添加失败', 0);
 		}
 	}
 
-	// 获取系信息
+	// 获取系列表信息
 	public function indexList()
 	{
-		$list = DepartmentModel::all();
-		if ($list) {
-			return json_return($list, '系信息查询成功', 1);
+		if (!$this->userId) {
+			return json_return(null, '用户未登录，系列表信息获取失败', 0);
+		}
+		if ($this->userAuth == 1) {
+			$list = DepartmentModel::all();
+			if ($list) {
+				return json_return($list, '系信息查询成功', 1);
+			} else {
+				return json_return(null, '系信息查询失败', 0);
+			}
 		} else {
-			return json_return(null, '系信息查询失败', 0);
+			return json_return(null, '用户权限不够，系列表信息获取失败', 0);
 		}
 	}
 

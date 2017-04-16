@@ -4,8 +4,9 @@ namespace app\api\controller;
 use app\api\model\User as UserModel;
 use app\api\model\Student as StudentModel;
 use app\api\model\Teacher as TeacherModel;
+use app\api\controller\Base;
 
-class User
+class User extends Base;
 {
 	// 获取用户信息
 	public function indexList()

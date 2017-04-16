@@ -2,8 +2,9 @@
 namespace app\api\controller;
 
 use app\api\model\Score as ScoreModel;
+use app\api\controller\Base;
 
-class Score
+class Score extends Base;
 {
 	// 查询成绩列表信息
 	public function indexList()
