@@ -236,4 +236,14 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    //设置验证码
+    'captcha'  => [
+    // 字体大小
+    'fontSize' => 18,
+    // 验证码长度（位数）
+    'length'   => 4,
+    //使用中文验证码
+    'useZh' => true,
+    ],
 ];

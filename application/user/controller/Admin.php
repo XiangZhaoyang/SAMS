@@ -1,12 +1,14 @@
 <?php
-namespace app\user\contrller;
+namespace app\user\controller;
 
-class Admin
+use think\Controller;
+
+class Admin extends Controller;
 {
 	// 主页
 	public function home()
 	{
-		;
+		return $this->fetch();
 	}
 
 	// admin用户注销

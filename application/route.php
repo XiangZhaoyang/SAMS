@@ -75,9 +75,9 @@ return [
         '/delete/:id'    => ['api/teacher/delete', ['method' => 'delete']],
     ],
 
-    '[user/index]'              => [
-        'login'         => ['user/index/login', ['method' => 'post']],
-    ],
+    // '[user/index]'              => [
+    //     'login'         => ['user/index/login', ['method' => 'post']],
+    // ],
 
     // '[hello]'     => [
     //     ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],

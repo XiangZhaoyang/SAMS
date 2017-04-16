@@ -2,12 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>xx学生成绩管理系统</title>
+    <title>sams-index</title>
     <link rel="stylesheet" type="text/css" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/user/index/index.css">
     <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/user/index/index.js"></script>
 </head>
 <body>
-    <h1>hello,world</h1>
+   <form action="/user/index/login" method="post" name="loginForm" class="loginForm">
+		<div>
+			<label title="登录名" for="loginUser"><img src="/static/img/user/index/liginUser.png"/></label>
+			<input type="text" id="loginUser" name="userId" value=""/>
+			<input type="text" class="userHint" value="用户名"/>
+		</div>
+		<div>
+			<label title="密码" for="loginPass"><img src="/static/img/user/index/loginPadd.png"/></label>
+			<input type="password" id="loginPass" name="userPass"/>
+			<input type="text" class="userPasswordHint" name="" id="" value="至少6位的密码" />
+		</div>
+		<div class="captcha">
+			<input type="text" name="code" value="请输入验证码" class='code'>
+			<img src="/captcha" alt="" class="captchaImg" alt="验证码" >
+			<a class="captchaRefresh" href="javascript:;">换一张</a>
+		</div>
+		<input class="button" type="submit" name="" id="" value="登录" />
+		<p class="loginUserHint loginHint"></p>
+	</form>
 </body>
 </html>

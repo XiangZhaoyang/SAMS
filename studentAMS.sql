@@ -4,7 +4,7 @@ use studentAMS;
 
 create table user(
 	user_id bigint(12) UNSIGNED not null primary key,
-	user_pass varchar(256) not null default '7c4a8d09ca3762af61e59520943dc26494f8941b',
+	user_pass varchar(256) not null default '$2y$10$vZ0Wm.W7NbcZr9Bf7dDqzeYi/TG4FwIPEgrzqtJ8GsSXu9vclyuve',
 	user_createTime timestamp default CURRENT_TIMESTAMP,
 	user_auth tinyint(1) not null default 1
 )engine=innodb default charset=utf8;
