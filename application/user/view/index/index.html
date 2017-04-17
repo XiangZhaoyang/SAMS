@@ -9,27 +9,31 @@
     <script type="text/javascript" src="/static/js/user/index/index.js"></script>
 </head>
 <body>
-   <form action="/user/index/login" method="post" name="loginForm" class="loginForm">
-		<div>
-			<label title="登录名" for="loginUser">
-				<img src="/static/img/user/index/liginUser.png"/></label>
-			<input type="text" id="loginUser" name="userId" value=""/>
-			<input type="text" class="userHint" value="用户名"/>
-		</div>
-		<div>
-			<label title="密码" for="loginPass">
-				<img src="/static/img/user/index/loginPadd.png"/>
-			</label>
-			<input type="password" id="loginPass" name="userPass"/>
-			<input type="text" class="userPasswordHint" name="" id="" value="至少6位的密码" />
-		</div>
-		<div class="captcha">
-			<input type="text" name="code" value="请输入验证码" class='code'>
-			<img src="/captcha" alt="" class="captchaImg" alt="验证码" >
-			<a class="captchaRefresh" href="javascript:;">换一张</a>
-		</div>
-		<input class="button" type="submit" name="" id="" value="登录" />
-		<p class="loginUserHint loginHint"></p>
-	</form>
+   <div id="container">
+	   	<div id="content">
+	   		<form action="/user/index/login" method="post" name="loginForm" class="loginForm">
+				<div>
+					<label title="登录名" for="loginUser">
+						<img src="/static/img/user/index/liginUser.png"/></label>
+					<input type="text" id="loginUser" name="userId" value=""/>
+					<input type="text" class="userHint" value="用户名"/>
+				</div>
+				<div>
+					<label title="密码" for="loginPass">
+						<img src="/static/img/user/index/loginPadd.png"/>
+					</label>
+					<input type="password" id="loginPass" name="userPass"/>
+					<input type="text" class="userPasswordHint" name="" id="" value="至少6位的密码" />
+				</div>
+				<div class="captcha">
+					<input type="text" name="code" value="请输入验证码" class='code'>
+					<img src="/captcha" alt="" class="captchaImg" alt="验证码" >
+					<a class="captchaRefresh" href="javascript:;">换一张</a>
+				</div>
+				<input class="button" type="submit" name="" id="" value="登        录" />
+				<p class="loginUserHint loginHint"></p>
+			</form>
+	   </div>
+   </div>
 </body>
 </html>
