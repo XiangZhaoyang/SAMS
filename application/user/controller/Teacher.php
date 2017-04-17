@@ -12,7 +12,14 @@ class Teacher
 	// 注销
 	public function logout()
 	{
-		;
+		$ulogin = ulogin();
+		if ($ulogin) {
+			session('userId', null);
+			session('userAuth', null);
+			return json_return(true, '用户注销成功', 1, 'user/index/index');
+		} else {
+			return json_return(null, '用户未登录，注销失败', 0);
+		}
 	}
 
 	// 添加成绩

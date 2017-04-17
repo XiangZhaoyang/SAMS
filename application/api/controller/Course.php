@@ -4,7 +4,7 @@ namespace app\api\controller;
 use app\api\model\Course as CourseModel;
 use app\api\controller\Base;
 
-class Course extends Base;
+class Course extends Base
 {
 	//调用父类构造函数
 	function __construct()
@@ -33,7 +33,7 @@ class Course extends Base;
 				return json_return(null, '课程列表信息查询失败', 0);
 			}
 		} elseif ($this->userAuth == 3) {
-			$student = db('student')->where('student_id', $this->userId)->select();
+			$student = db('student', [], false)->where('student_id', $this->userId)->select();
 			$classes_id = $student[0]['student_classes_id'];
 			$list = CourseModel::all(['course_classes_id'] => $classes_id);
 			if ($list) {
@@ -67,7 +67,7 @@ class Course extends Base;
 				return json_return(null, '课程信息查询失败', 0);
 			}
 		} elseif ($this->userAuth == 3) {
-			$student = db('student')->where('student_id', $this->userId)->select();
+			$student = db('student', [], false)->where('student_id', $this->userId)->select();
 			$classes_id = $student[0]['student_classes_id'];
 			$course = CourseModel::get(['course_id' => $id, 'course_classes_id' => $classes_id]);
 			if ($course) {

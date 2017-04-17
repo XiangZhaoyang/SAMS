@@ -3,8 +3,9 @@ namespace app\api\controller;
 
 use app\api\model\Classes as ClassesModel;
 use app\api\controller\Base;
+use think\Db;
 
-class Classes extends Base;
+class Classes extends Base
 {
 	//调用父类构造函数
 	function __construct()
@@ -25,7 +26,16 @@ class Classes extends Base;
 			} else {
 				return json_return(null, '班级列表信息查询失败', 0);
 			}
-		} else {
+		} elseif ($this->userAuth == 2) {
+			$strQuery = 'select classes.* from classes, course where classes.classes_id = course.course_classes_id and course.course_teacher_id=? ';
+			$classes = Db::query($strQuery, [$this->userId]);
+			if ($classes) {
+				return json_return($classes, '班级信息查询成功', 1);
+			} else {
+				return json_return($classes, '班级信息查询失败', 0);
+			}
+		}
+		 else {
 			return json_return(null, '用户权限不够，班级列表信息查询失败', 0);
 		}
 	}
@@ -38,14 +48,29 @@ class Classes extends Base;
 		}
 		if ($this->userAuth == 1) {
 			$classes = ClassesModel::get($id);
-			if ($class) {
+			if ($classes) {
 				return json_return($classes, '班级信息查询成功', 1);
 			} else {
 				return json_return($classes, '班级信息查询失败', 0);
 			}
 		} elseif ($this->userAuth == 2) {
-			$course = db('course')->where('course_teacher_id', $this->userId)->select();
-			// $course_id = $course_id
+			$strQuery = 'select classes.* from classes, course where classes.classes_id = course.course_classes_id and course.course_teacher_id=? and classes.classes_id=? ';
+			$classes = Db::query($strQuery, [$this->userId], $id);
+			if ($classes) {
+				return json_return($classes, '班级信息查询成功', 1);
+			} else {
+				return json_return($classes, '班级信息查询失败', 0);
+			}
+		} elseif ($this->userAuth == 3) {
+			$strQuery = 'select classes.* from classes, student where classes.classes_id = student.student_classes_id and student.student_id=? and classes.classe_id=? ';
+			$classes = Db::query($strQuery, [$this->userId, $id]);
+			if ($classes) {
+				return json_return($classes, '班级信息查询成功', 1);
+			} else {
+				return json_return($classes, '班级信息查询失败', 0);
+			}
+		} else {
+			return json_return(null, '用户权限不够，班级信息查询失败', 0);
 		}
 	}
 
@@ -55,8 +80,8 @@ class Classes extends Base;
 		if (!$this->userId) {
 			return json_return(null, '用户未登录，删除班级信息失败', 0);
 		}
-		if ($$this->userAuth == 1) {
-			$class = ClassesModel::get($id);
+		if ($this->userAuth == 1) {
+			$classes = ClassesModel::get($id);
 			if ($classes) {
 				$rt = $classes->delete();
 				if ($rt) {
