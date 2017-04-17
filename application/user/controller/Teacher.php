@@ -6,7 +6,13 @@ class Teacher
 	// teacher主页
 	public function home()
 	{
-		;
+		$ulogin = ulogin();
+		if (!$ulogin) {
+			redirect('/user/index/index');
+		}
+		$userName = $ulogin['userId'];
+		$this->assign('userName', $userName);
+		return $this->fetch();
 	}
 
 	// 注销

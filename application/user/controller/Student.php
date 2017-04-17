@@ -1,14 +1,20 @@
 <?php
-namespace app\user\contrller;
+namespace app\user\controller;
 
 use think\Controller;
 
-class Student
+class Student extends Controller
 {
 	// student主页
 	public function home()
 	{
-		;
+		$ulogin = ulogin();
+		if (!$ulogin) {
+			redirect('/user/index/index');
+		}
+		$userName = $ulogin['userId'];
+		$this->assign('userName', $userName);
+		return $this->fetch();
 	}
 
 	// student注销

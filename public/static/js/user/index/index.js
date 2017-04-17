@@ -140,7 +140,32 @@ window.onload = function() {
 			loginHintNode.innerText = '验证码没有正确输入';
 			return false;
 		}
+		var $req = jQuery.ajax({
+				url: '/user/index/login/',
+				type: 'POST',
+				dataType: 'json',
+				data: {'userId': userName, 'userPass': userPassword, 'code': code},
+				// complete: function(xhr, textStatus) {
+			 //    	//called when complete
+			 //  	},
+			  	success: function(data, textStatus, xhr) {
+					if (data.code == 1) {
+						window.location.href = data.url;
+					} else if (data.code == 0) {
+						show(loginHintNode);
+						loginHintNode.innerText = data.message;
+					}
+			  	},
+			  	error: function(xhr, textStatus, errorThrown) {
+			    	show(loginHintNode);
+					loginHintNode.innerText = '请求失败，请稍后再试。';
+			  	}
+		});
 	}
+
+	loginFormNode.onsubmit = function(e) {
+		e.preventDefault();
+	};
 
 	captchaRefreshNode.onclick = function() {
 		captchaImgNode.src = '/captcha?'  + randomNumStr(10);
