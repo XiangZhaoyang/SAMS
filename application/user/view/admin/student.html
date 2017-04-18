@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>学生管理</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+	<link rel="stylesheet" href="/static/css/user/admin/student.css">
+	<script type="text/javascript" src="/static/js/jquery.js"></script>
+	<script type="text/javascript" src="/static/js/user/admin/student.js"></script>
+</head>
+<body>
+	<div id="container">
+		<div id="nav"  onselectstart="return false;">
+			<a href="javascript:;" class="studentModifyInf navItem select">查询修改学生信息</a>
+			<a href="javascript:;" class="studentAddOne navItem">添&nbsp;&nbsp;加&nbsp;学&nbsp;生&nbsp;信&nbsp;&nbsp;息</a>
+			<a href="javascript:;" class="studentAdd navItem">添&nbsp;加学生信息&nbsp;(班)</a>
+			<a href="javascript:;" class="studentResetPass navItem">重&nbsp;&nbsp;置&nbsp;学&nbsp;生&nbsp;密&nbsp;&nbsp;码</a>
+			<a href="javascript:;" class="studentDelete navItem">删&nbsp;&nbsp;除&nbsp;学&nbsp;生&nbsp;信&nbsp;&nbsp;息</a>
+		</div>
+		<div id="content">
+			<!-- 学生信息查询修改模块 -->
+			<div id="studentModifyInfCnt" class="navCntItem">
+				<h3 class="hint">请选择查询条件:</h3>
+				<a href="javascript:;" class="qId hint1">根据学生id查询</a>
+				<a href="javascript:;" class="qClasses hint1">根据班级查询</a>
+				<br>
+				<label class="hint">请输入学生id:
+					<input type="text/submit/hidden/button/etc" name="" value="">
+				</label>
+				<label class="hint1">请选择班级：
+					<select>
+						<option value=""></option>}
+						option
+					</select>
+				</label>
+				<div class="qResult"></div>
+			</div>
+
+			<!-- 学生信息添加模块 -->
+			<div id="studentAddOneCnt" class="navCntItem hide">dsfasdfadsfdsaf</div>
+
+			<!-- 学生信息添加模块(根据班级添加) -->
+			<div id="studentAddCnt" class="navCntItem hide"></div>
+
+			<!-- 学生密码重置模块 -->
+			<div id="studentResetPassCnt" class="navCntItem hide"></div>
+
+			<!-- 学生信息删除模块 -->
+			<div id="studentDelete" class="navCntItem hide"></div>
+		</div>
+	</div>
+</body>
+</html>

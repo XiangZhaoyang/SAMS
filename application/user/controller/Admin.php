@@ -5,13 +5,28 @@ use think\Controller;
 
 class Admin extends Controller
 {
-	// 主页
-	public function home()
+	//判断用户是否登录
+	private function isLogin()
 	{
 		$ulogin = ulogin();
 		if (!$ulogin) {
-			redirect('/user/index/index');
+			$this->redirect('/user/index/index/');
+			return;
 		}
+		if($ulogin['userAuth'] == 2) {
+			$this->redirect('/user/teacher/home/');
+			return;
+		} elseif($ulogin['userAuth'] == 3) {
+			$this->redirect('/user/student/home/');
+			return;
+		}
+	}
+
+	// 主页
+	public function home()
+	{
+		$this->isLogin();
+		$ulogin = ulogin();
 		$userName = $ulogin['userId'];
 		$this->assign('userName', $userName);
 		return $this->fetch();
@@ -30,77 +45,59 @@ class Admin extends Controller
 		}
 	}
 
-	// 添加学生用户
-	public function addStudent()
+	// 学生管理
+	public function student()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 添加教师用户
-	public function addTeacher()
+	// 教师管理
+	public function teacher()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 添加管理员
-	public function addAdmin()
+	//账号管理
+	public function admin()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-
-	// 添加学生用户信息
-	public function addStudentInformation()
+	// 课程管理
+	public function course()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 添加教师信息
-	public function addTeacherInformation()
+	// 成绩管理
+	public function score()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 添加管理员信息
-	public function addAdminInformation()
+	//院系管理
+	public function department()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 课程添加
-	public function addCourse()
+	//班级管理
+	public function classes()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 选课
-	public function takeCourse()
+	//用户管理
+	public function user()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
-
-	// 重置密码
-	public function resetPass()
-	{
-		;
-	}
-
-	// 修改成绩
-	public function modifyGrade()
-	{
-		;
-	}
-
-	// 修改密码
-	public function modifyPass()
-	{
-		;
-	}
-
-	// 查看信息
-	public function information()
-	{
-		;
-	}
-
 }
