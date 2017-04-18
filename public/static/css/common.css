@@ -80,3 +80,6 @@ a {
 .show{
 	display: block;
 }
+.showInline{
+	display: inline-block;;
+}

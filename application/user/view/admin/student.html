@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="/static/js/jquery.js"></script>
 	<script type="text/javascript" src="/static/js/user/admin/student.js"></script>
 </head>
-<body>
+<body onselectstart="return false;">
 	<div id="container">
 		<div id="nav"  onselectstart="return false;">
 			<a href="javascript:;" class="studentModifyInf navItem select">查询修改学生信息</a>
@@ -23,16 +23,19 @@
 				<h3 class="hint">请选择查询条件:</h3>
 				<a href="javascript:;" class="qId hint1">根据学生id查询</a>
 				<a href="javascript:;" class="qClasses hint1">根据班级查询</a>
-				<br>
-				<label class="hint">请输入学生id:
-					<input type="text/submit/hidden/button/etc" name="" value="">
+				<label class="hint hide qIdHint">请输入学生id:
+					<input type="text/submit/hidden/button/etc" name="" value="" id="sId">
+					<a href="javascript:;" class="qIdBtn hint1">确定</a>
 				</label>
-				<label class="hint1">请选择班级：
-					<select>
-						<option value=""></option>}
-						option
+				<label class="hint hide qCNameHint">请选择班级：
+					<select id="cName">
+					<!-- <option value=""></option> -->
 					</select>
+					<a href="javascript:;" class="qCNameBtn hint1">确定</a>
 				</label>
+				<div class="qResultHint hintBox hide">
+					<h3 class="hintText"></h3>
+				</div>
 				<div class="qResult"></div>
 			</div>
 
