@@ -46,19 +46,18 @@ body{
 	position: absolute;
 	right: 0;
 	width: 83%;
+	height: 100%;
 	min-width: 830px;
 	overflow: auto;
-	height: 100%;
 }
 
 #content .navCntItem{
 	width: 98%;
 	height: 98%;
 	position: relative;
-	margin: 1% auto;
-	min-width: 1500px;
+	margin: 0 auto;
+	min-width: 900px;
 	font-size: 16px;
-	/*overflow: auto;*/
 }
 
 .hint{
@@ -109,8 +108,6 @@ body{
 .qResult{
 	width: 100%;
 	height: 80%;
-	min-width: 1200px;
-	overflow: auto;
 	margin: 2% 0 0;
 	background-color: rgb(200,200,200);
 	border-radius: 6px;
@@ -142,6 +139,7 @@ body{
 }
 .rTable .tableContentItem td{
 	border: 1px solid rgb(44,44,44);
+	padding: 0px;
 }
 .rTable td{
 	text-align: center;
@@ -164,6 +162,13 @@ body{
 .rTable .tContent tr td.handle{
 	min-width: 100px;
 	background-color: #697F96;
+}
+.rTable .tContent tr td span{
+	display: inline-block;
+	height: 50px;
+	line-height: 50px;
+	color: rgb(255,255,255);
+	background-color: #475A6F;
 }
 .rTable .tContent tr td.handle a{
 	display: inline-block;
@@ -188,6 +193,8 @@ body{
 	background-color: #FA2B2F;
 }
 .rTable .tContent tr:nth-child(odd) td input{
+	text-align: center;
+	overflow: auto;
 	background-color: #A2BAA8;
 }
 .rTable .tContent tr:nth-child(odd) td input.select{
