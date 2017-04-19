@@ -11,11 +11,9 @@
 <body onselectstart="return false;">
 	<div id="container">
 		<div id="nav"  onselectstart="return false;">
-			<a href="javascript:;" class="studentModifyInf navItem select">查询修改学生信息</a>
-			<a href="javascript:;" class="studentAddOne navItem">添&nbsp;&nbsp;加&nbsp;学&nbsp;生&nbsp;信&nbsp;&nbsp;息</a>
-			<a href="javascript:;" class="studentAdd navItem">添&nbsp;加学生信息&nbsp;(班)</a>
-			<a href="javascript:;" class="studentResetPass navItem">重&nbsp;&nbsp;置&nbsp;学&nbsp;生&nbsp;密&nbsp;&nbsp;码</a>
-			<a href="javascript:;" class="studentDelete navItem">删&nbsp;&nbsp;除&nbsp;学&nbsp;生&nbsp;信&nbsp;&nbsp;息</a>
+			<a href="javascript:;" class="studentModifyInf navItem select">学生信息管理</a>
+			<a href="javascript:;" class="studentAddOne navItem">添加学生信息</a>
+			<a href="javascript:;" class="studentResetPass navItem">重置学生密码</a>
 		</div>
 		<div id="content">
 			<!-- 学生信息查询修改模块 -->
@@ -24,11 +22,11 @@
 				<a href="javascript:;" class="qId hint1">根据学生id查询</a>
 				<a href="javascript:;" class="qClasses hint1">根据班级查询</a>
 				<label class="hint hide qIdHint">请输入学生id:
-					<input type="text/submit/hidden/button/etc" name="" value="" id="sId">
+					<input type="text" name="" value="" id="sId" class="hintInp">
 					<a href="javascript:;" class="qIdBtn hint1">确定</a>
 				</label>
 				<label class="hint hide qCNameHint">请选择班级：
-					<select id="cName">
+					<select id="cName" class='hintSel'>
 					<!-- <option value=""></option> -->
 					</select>
 					<a href="javascript:;" class="qCNameBtn hint1">确定</a>
@@ -36,20 +34,132 @@
 				<div class="qResultHint hintBox hide">
 					<h3 class="hintText"></h3>
 				</div>
-				<div class="qResult"></div>
+				<div class="qResult">
+					<table class="rTable">
+						<thead>
+							<tr class="tableTile">
+								<th>学号</th>
+								<th>姓名</th>
+								<th>性别</th>
+								<th>出生日期</th>
+								<th>家庭住址</th>
+								<th>联系电话</th>
+								<th>电子邮箱</th>
+								<th>身份证码</th>
+								<th>班级</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody class="tContent">
+							<tr class="tableContentItem">
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf" class="select">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td class="handle">
+									<a href="javascript:;" class="modify">修改</a>
+									<a href="javascript:;" class="delete">删除</a>
+								</td>
+							</tr>
+							<tr class="tableContentItem">
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf" class="select">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td class="handle">
+									<a href="javascript:;" class="modify">修改</a>
+									<a href="javascript:;" class="delete">删除</a>
+								</td>
+							</tr>
+							<tr class="tableContentItem">
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf" class="select">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td class="handle">
+									<a href="javascript:;" class="modify">修改</a>
+									<a href="javascript:;" class="delete">删除</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 
 			<!-- 学生信息添加模块 -->
 			<div id="studentAddOneCnt" class="navCntItem hide">dsfasdfadsfdsaf</div>
 
-			<!-- 学生信息添加模块(根据班级添加) -->
-			<div id="studentAddCnt" class="navCntItem hide"></div>
-
 			<!-- 学生密码重置模块 -->
 			<div id="studentResetPassCnt" class="navCntItem hide"></div>
-
-			<!-- 学生信息删除模块 -->
-			<div id="studentDelete" class="navCntItem hide"></div>
 		</div>
 	</div>
 </body>

@@ -62,6 +62,7 @@ return [
     '[api/student]'           => [
         '/index'        => ['api/student/indexList', ['method' => 'get']],
         ':id'           => ['api/student/read', ['method' => 'get']],
+        '/indexByCid/:cid' => ['api/student/indexByClassId', ['method' => 'get']],
         '/add'          => ['api/student/add', ['method' => 'post']],
         '/update/:id'   => ['api/student/update', ['method' => 'put']],
         '/delete/:id'    => ['api/student/delete', ['method' => 'delete']],

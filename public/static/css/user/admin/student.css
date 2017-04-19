@@ -47,6 +47,7 @@ body{
 	right: 0;
 	width: 83%;
 	min-width: 830px;
+	overflow: auto;
 	height: 100%;
 }
 
@@ -55,9 +56,9 @@ body{
 	height: 98%;
 	position: relative;
 	margin: 1% auto;
-	min-width: 800px;
+	min-width: 1500px;
 	font-size: 16px;
-	overflow: auto;
+	/*overflow: auto;*/
 }
 
 .hint{
@@ -76,6 +77,12 @@ body{
 }
 .hint1:hover{
 	background-color: rgb(44,66,88);
+}
+.hintInp{
+	color: #549D79;
+}
+.hintSel{
+	color: #549D79;
 }
 .hintBox {
 	position: fixed;
@@ -98,11 +105,92 @@ body{
 	top: 40%;
 	color: rgb(255,255,255);
 }
+
 .qResult{
 	width: 100%;
 	height: 80%;
+	min-width: 1200px;
 	overflow: auto;
 	margin: 2% 0 0;
 	background-color: rgb(200,200,200);
 	border-radius: 6px;
+}
+
+.rTable{
+	width: 99%;
+	padding: 0;
+	margin: 0 auto;
+	color: rgb(66,66,66);
+	border-collapse:collapse;
+}
+.rTable th{
+	height: 30px;
+}
+.rTable td{
+	height: 50px;
+	line-height: 50px;
+	padding: 0;
+	margin: 0;
+}
+.rTable .tableTile{
+	color: rgb(44,44,44);
+	background-color: rgb(133,133,133);
+}
+.rTable .tableTile th{
+	width: 10%;
+	border: 1px solid rgb(22,22,22);
+}
+.rTable .tableContentItem td{
+	border: 1px solid rgb(44,44,44);
+}
+.rTable td{
+	text-align: center;
+}
+
+.rTable .tContent tr td input{
+	border: none;
+	color: rgb(22,22,22);
+	background-color: rgb(230,230,230);
+	height: 100%;
+	width: 100%;
+}
+.rTable .tContent tr:hover td input,.rTable .tContent tr:nth-child(odd):hover td input{
+	background-color: #6E9695;
+}
+.rTable .tContent tr td input.select{
+	color: rgb(255,255,225);
+	background-color: #6F897A;
+}
+.rTable .tContent tr td.handle{
+	min-width: 100px;
+	background-color: #697F96;
+}
+.rTable .tContent tr td.handle a{
+	display: inline-block;
+	width: 40%;
+	height: 40px;
+	margin-top: 5px;
+	line-height: 40px;
+	border-radius: 4px;
+	font-weight: bold;
+	color: rgb(255,255,255);
+}
+.rTable .tContent tr td.handle a.modify{
+	background-color: #F0B236;
+}
+.rTable .tContent tr td.handle a.modify:hover{
+	background-color: #FE7C49;
+}
+.rTable .tContent tr td.handle a.delete{
+	background-color: #F57981;
+}
+.rTable .tContent tr td.handle a.delete:hover{
+	background-color: #FA2B2F;
+}
+.rTable .tContent tr:nth-child(odd) td input{
+	background-color: #A2BAA8;
+}
+.rTable .tContent tr:nth-child(odd) td input.select{
+	color: rgb(255,255,225);
+	background-color: #6F897A;
 }

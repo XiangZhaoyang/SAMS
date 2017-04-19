@@ -16,9 +16,9 @@ class Index extends Controller
 	public function login()
 	{
 		$captcha = new Captcha();
-		if (!$captcha->check(input('post.code'))) {
-			return json_return(null,'验证码错误，请重新登录', 0);
-		}
+		// if (!$captcha->check(input('post.code'))) {
+		// 	return json_return(null,'验证码错误，请重新登录', 0);
+		// }
 		$userid = input('post.userId');
 		$userPass = input('post.userPass');
 		$pass = db('user')->where('user_id', $userid)->select();

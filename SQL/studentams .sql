@@ -167,9 +167,9 @@ INSERT INTO `teacher` (`teacher_id`, `teacher_department_id`, `teacher_name`, `t
 
 CREATE TABLE `user` (
   `user_id` bigint(12) UNSIGNED NOT NULL,
-  `user_pass` varchar(256) NOT NULL DEFAULT '7c4a8d09ca3762af61e59520943dc26494f8941b',
+  `user_pass` varchar(256) NOT NULL DEFAULT '$2y$10$vZ0Wm.W7NbcZr9Bf7dDqzeYi/TG4FwIPEgrzqtJ8GsSXu9vclyuve',
   `user_createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_auth` tinyint(1) NOT NULL DEFAULT '1'
+  `user_auth` tinyint(1) NOT NULL DEFAULT '3'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -177,9 +177,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_pass`, `user_createTime`, `user_auth`) VALUES
-(199211178097, 'ce4c41a80b6d1146f9f0e08eea21bc56e011cfd9', '2017-04-08 06:49:11', 3),
-(200120012001, '7c4a8d09ca3762af61e59520943dc26494f8941b', '2017-04-08 06:49:55', 2),
-(201301094134, '7c4a8d09ca3762af61e59520943dc26494f8941b', '2017-04-08 06:50:07', 1);
+(201301094134, '$2y$10$vZ0Wm.W7NbcZr9Bf7dDqzeYi/TG4FwIPEgrzqtJ8GsSXu9vclyuve', '2017-04-08 06:49:11', 3),
+(200120012001, '$2y$10$vZ0Wm.W7NbcZr9Bf7dDqzeYi/TG4FwIPEgrzqtJ8GsSXu9vclyuve', '2017-04-08 06:49:55', 2),
+(199211178097, '$2y$10$vZ0Wm.W7NbcZr9Bf7dDqzeYi/TG4FwIPEgrzqtJ8GsSXu9vclyuve', '2017-04-08 06:50:07', 1);
 
 --
 -- Indexes for dumped tables
