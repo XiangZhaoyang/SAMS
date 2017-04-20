@@ -12,6 +12,7 @@ function showHint($node,message) {
 	$node[0].innerText = message;
 }
 
+
 //选择模块
 $(function(){
 	var $studentModifyInfNd = $('#nav .studentModifyInf'),
@@ -27,18 +28,27 @@ $(function(){
 		var that = event.target;
 		switch (that) {
 			case $studentModifyInfNd[0]: {
+				$studentModifyInfNd.addClass('select');
+				$studentAdd.removeClass('select');
+				$studentResetPass.removeClass('select');
 				$studentAddCntNd.removeClass('show').addClass('hide');
 				$studentResetPassCnt.removeClass('show').addClass('hide');
 				$studentModifyInfCntNd.removeClass('hide').addClass('show');
 			}
 			break;
 			case $studentAdd[0]: {
+				$studentModifyInfNd.removeClass('select');
+				$studentAdd.addClass('select');
+				$studentResetPass.removeClass('select');
 				$studentModifyInfCntNd.removeClass('show').addClass('hide');
 				$studentResetPassCnt.removeClass('show').addClass('hide');
 				$studentAddCntNd.removeClass('hide').addClass('show');
 			}
 			break;
-			case $studentResetPassCnt[0]: {
+			case $studentResetPass[0]: {
+				$studentModifyInfNd.removeClass('select');
+				$studentAdd.removeClass('select');
+				$studentResetPass.addClass('select');
 				$studentAddCntNd.removeClass('show').addClass('hide');
 				$studentModifyInfCntNd.removeClass('show').addClass('hide');
 				$studentResetPassCnt.removeClass('hide').addClass('show');
@@ -47,6 +57,7 @@ $(function(){
 		}
 	});
 });
+
 
 //学生信息查询修改模块
 $(function($) {
@@ -325,13 +336,13 @@ $(function($) {
 
 	//返回结果数据生成
 	function showRt(qRData){
-		var rstr = ''
+		var rstr = '',
 		qOA = [];
 		qRData.forEach(function(item,index){
-			var data = item;
-			var qO = {};
-			var qData = qO.data = {};
-			var sId = qData['student_id'] = data['student_id'],
+			var data = item,
+				qO = {}
+				qData = qO.data = {},
+				sId = qData['student_id'] = data['student_id'],
 				sName = qData['student_name'] = data['student_name'],
 				sSex = (data['student_sex'] == 1) ? '男' : '女',
 				sBir = qData['student_brith'] =data['student_brith'],
@@ -362,6 +373,86 @@ $(function($) {
 				'"></td><td class="handle"><a href="javascript:;" class="modify" item="' + index +
 				'">修改</a>'+'<a href="javascript:;" class="delete" item="' + index +
 				'">删除</a></td></tr>';
+			$tContentNd[0].innerHTML = rstr;
+			qOA[index] = qO;
+		});
+	}
+});
+
+
+//学生密码重置模块
+$(function(){
+	var $studentAddCntNd = $('#content #studentAddCnt'),
+		$qResultNd = $('#studentAddCnt .qResult'),
+		$qBtn = $('#studentAddCnt .qBtn'),
+		$tContentNd = $('#studentAddCnt .tContent');
+
+	//内容对象数组
+	var qOA = [];
+
+	$qBtn.on('click', function(event) {
+		event.preventDefault();
+		var url = '/user/admin/studentUser';
+		$req = $.ajax({
+			url: url,
+			type: 'GET',
+			dataType: 'json',
+			data:'',
+		})
+		.done(function(data) {
+			if (data.code == 1) {
+				if (data.data) {
+					var data = data.data;
+					showRt(data);
+				}
+			}
+		})
+		.fail(function(err) {
+			console.log(err);
+		})
+		.always(function() {
+			console.log("complete");
+		});
+	});
+
+	//学生用户数据生成
+	function showRt(data) {
+		var rstr = '';
+		qOA = [];
+		data.forEach(function(item, index){
+			var data = item,
+				qO = {}
+				qData = qO.data = {},
+				sId = qData['student_id'] = data['user_id'],
+				sName = qData['student_name'] = '',
+				sSex = '',
+				sBir = qData['student_brith'] = '',
+				sAdress = qData['student_address'] = '',
+				sPhone = qData['student_phoneNum'] = '',
+				sEmail = qData['student_email'] = '',
+				sIdCard = qData['student_idcard'] = '',
+				sClasses = qData['student_classes_id'] = '';
+			qData['student_sex'] = '';
+			qO.change = false;
+			rstr += '<tr class="tableContentItem"><td><span class="student_id">' + sId +
+				'</span></td><td><input class="student_name" item="' + index + 
+				'" type="text" name="" value="'+ sName +
+				'"></td><td><input class="student_sex" item="' + index + 
+				'" type="text" name="" value="' + sSex +
+				'"></td><td><input class="student_brith" item="' + index + 
+				'" type="text" name="" value="'+ sBir +
+				'"></td><td><input class="student_address" item="' + index +
+				'" type="text" name="" value="'+ sAdress + 
+				'"></td><td><input class="student_phoneNum" item="' + index +
+				'" type="text" name="" value="' + sPhone + 
+				'"></td><td><input class="student_email" item="' + index + 
+				'" type="text" name="" value="' + sEmail + 
+				'"></td><td><input class="student_idcard" item="' + index + 
+				'" type="text" name="" value="' + sIdCard + 
+				'"></td><td><input class="student_classes_id" item="' + index +
+				'" type="text" name="" value="' + sClasses + 
+				'"></td><td class="handle"><a href="javascript:;" class="add" item="' + index +
+				'">添加</a>'+'</td></tr>';
 			$tContentNd[0].innerHTML = rstr;
 			qOA[index] = qO;
 		});

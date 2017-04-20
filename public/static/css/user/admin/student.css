@@ -262,3 +262,11 @@ body{
 	color: rgb(255,255,225);
 	background-color: #6F897A;
 }
+
+/*添加信息模块*/
+.rTable .tContent tr td.handle a.add{
+	background-color: #F0B236;
+}
+.rTable .tContent tr td.handle a.add:hover{
+	background-color: #FE7C49;
+}

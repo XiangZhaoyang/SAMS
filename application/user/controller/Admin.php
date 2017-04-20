@@ -2,6 +2,7 @@
 namespace app\user\controller;
 
 use think\Controller;
+use think\Db;
 
 class Admin extends Controller
 {
@@ -50,6 +51,19 @@ class Admin extends Controller
 	{
 		$this->isLogin();
 		return $this->fetch();
+	}
+
+	//查询还未添加的学生用户
+	public function studentUser()
+	{
+		$this->isLogin();
+		$strQuery = 'select user_id from user left join (select student_id from student) as t1 on user.user_id = t1.student_id where t1.student_id is null and user_auth=?';
+		$list = Db::query($strQuery, [3]);
+		if ($list) {
+			return json_return($list, '用户列表查询成功',1);
+		} else {
+			return json_return(null, '用户列表查询失败', 0);
+		}
 	}
 
 	// 教师管理
