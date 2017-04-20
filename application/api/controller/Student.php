@@ -135,13 +135,13 @@ class Student extends Base
 		if ($this->userAuth == 1) {
 			$student = StudentModel::get($id);
 			if (!$student) {
-				return json_return(null, '不存在此学生，学生信息删除失败');
+				return json_return(null, '不存在此学生，学生信息删除失败', 0);
 			}
 			$rt = $student->delete();
 			if ($rt) {
-				return json_return($rt, '学生信息删除成功', 0);
+				return json_return($rt, '学生信息删除成功', 1);
 			} else {
-				return json_return(null, '学生信息删除失败', 1);
+				return json_return(null, '学生信息删除失败', 0);
 			}
 		} else {
 			return json_return(null, '用户权限不够，学生信息删除失败', 0);
