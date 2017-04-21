@@ -1,16 +1,35 @@
 <?php
 namespace app\user\contrller;
 
-class Teacher
+use think\Controller;
+use think\Db;
+
+class Teacher extends Controller
 {
-	// teacher主页
-	public function home()
+	//判断用户是否登录
+	private function isLogin()
 	{
 		$ulogin = ulogin();
 		if (!$ulogin) {
-			redirect('/user/index/index');
+			$this->redirect('/user/index/index/');
+			return;
 		}
-		$userName = $ulogin['userId'];
+		if($ulogin['userAuth'] == 1) {
+			$this->redirect('/user/admin/home/');
+			return;
+		} elseif($ulogin['userAuth'] == 3) {
+			$this->redirect('/user/student/home/');
+			return;
+		}
+	}
+
+	// teacher主页
+	public function home()
+	{
+		$this->isLogin();
+		$userId = $ulogin['userId'];
+		$user = Db::table('student')->where('teacher_id', $userId)->select();
+		$userName = $user[0]['teacher_name'];
 		$this->assign('userName', $userName);
 		return $this->fetch();
 	}
@@ -28,33 +47,31 @@ class Teacher
 		}
 	}
 
-	// 添加成绩
-	public function addGrade()
+	//teacher信息管理
+	public function information()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 修改成绩
-	public function modifyGrade()
+	//teacher课程管理
+	public function course()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 查看信息
-	public function viewInformation()
+	//teacher成绩管理
+	public function score()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 修改信息
-	public function modifyInformation()
+	//teacher账号管理
+	public function teacher()
 	{
-		;
-	}
-
-	// 修改密码
-	public function modifyPass()
-	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 }

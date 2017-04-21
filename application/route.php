@@ -71,9 +71,15 @@ return [
     '[api/teacher]'           => [
         '/index'        => ['api/teacher/indexList', ['method' => 'get']],
         ':id'           => ['api/teacher/read', ['method' => 'get']],
+        'indexByDid/:did' => ['api/teacher/indexByDepartmentId', ['method' => 'get']],
         '/add'          => ['api/teacher/add', ['method' => 'post']],
         '/update/:id'   => ['api/teacher/update', ['method' => 'put']],
         '/delete/:id'    => ['api/teacher/delete', ['method' => 'delete']],
+    ],
+
+    '[user/admin]'              =>[
+        '/studentPassReset/:id' => ['user/admin/studentPasswordReset', ['method' => 'put']],
+        '/teacherPassReset/:id' => ['user/admin/teacherPasswordReset', ['method' => 'put']],
     ],
 
     // '[user/index]'              => [

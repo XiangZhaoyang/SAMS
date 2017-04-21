@@ -24,6 +24,24 @@ class Teacher extends Base
 		}
 	}
 
+	//根据院系id查询教师列表信息
+	public function indexByDepartmentId($did)
+	{
+		if (!$this->userId) {
+			return json_return(null, '用户未登录，教师列表信息查询失败', 0);
+		}
+		if ($this->userAuth == 1) {
+			$list = TeacherModel::all(['teacher_department_id' => $did]);
+			if ($list) {
+				return json_return($list, '教师列表信息查询成功', 1);
+			} else {
+				return json_return(null, '教师列表信息查询失败', 0);
+			}
+		} else {
+			return json_return(null, '用户权限不够，教师列表信息查询失败', 0);
+		}
+	}
+
 	// 根据id查询教师信息
 	public function read($id)
 	{

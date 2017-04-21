@@ -59,7 +59,7 @@ $(function(){
 });
 
 
-//学生信息查询修改模块
+//教师信息查询修改模块
 $(function($) {
 	var $studentModifyInfCntNd = $('#studentModifyInfCnt'),
 		$qIdNd = $('#studentModifyInfCnt .qId'),
@@ -83,7 +83,7 @@ $(function($) {
 	//内容对象数组
 	var qOA = [];
 
-	//学生信息操作对象
+	//教师信息操作对象
 	var rHO = {
 		modify: false,
 		delete: false
@@ -100,7 +100,7 @@ $(function($) {
 		$qIdHintNd.removeClass('showInline').addClass('hide');
 		$qCNameHintNd.removeClass('hide').addClass('showInline');
 		$req = $.ajax({
-			url: '/api/classes/index/',
+			url: '/api/department/index/',
 			type: 'GET',
 			dataType: 'json',
 			data: '',
@@ -110,8 +110,8 @@ $(function($) {
 				var strOp = '';
 				if (data.data) {
 					data.data.forEach(function(item){
-						if (item['classes_id']) {
-							strOp += '<option value="' + item['classes_id'] + '">' + item['classes_name']+ '</option>';
+						if (item['department_id']) {
+							strOp += '<option value="' + item['department_id'] + '">' + item['department_name']+ '</option>';
 						}
 					});
 				}
@@ -124,17 +124,17 @@ $(function($) {
 		});
 	});
 
-	// 根据id查询学生信息
+	// 根据id查询教师信息
 	$qIdBtnNd.on('click', function(event) {
 		event.preventDefault();
 		var sId = $('#sId').val(),
-			url = '/api/student/' + sId,
+			url = '/api/teacher/' + sId,
 			rstr = '',
 			data,
 			dataArr = [];
 		if (!sId) {
 			showHintBox($qResultHint);
-			showHint($hintText,'请输入要查询学生的id');
+			showHint($hintText,'请输入要查询教师的id');
 			return;
 		}
 		$req = $.ajax({
@@ -164,7 +164,7 @@ $(function($) {
 		});
 	});
 
-	//修改删除学生信息(点击事件代理)
+	//修改删除教师信息(点击事件代理)
 	$tContentNd.on('click', function(event) {
 		event.preventDefault();
 		var that = event.target;
@@ -174,7 +174,6 @@ $(function($) {
 			//得到行索引
 			var index = that.getAttribute('item')
 			//判断内容是否改变
-			console.log(qOA[index]);
 			if(!qOA[index].change) {
 				showHintBox($qResultHint);
 				showHint($hintText,'内容并没改变,信息修改失败');
@@ -191,7 +190,7 @@ $(function($) {
 			$confirmNd.on('click', function(event) {
 				event.preventDefault();
 				$confirmboxNd.addClass('hide');
-				var sid = qOA[index].data['student_id'],
+				var sid = qOA[index].data['teacher_id'],
 					data = qOA[index].data;
 				modifySI(sid,data,index);
 			});
@@ -215,7 +214,7 @@ $(function($) {
 			$confirmNd.on('click', function(event) {
 				event.preventDefault();
 				$confirmboxNd.addClass('hide');
-				var sid = qOA[index].data['student_id'];
+				var sid = qOA[index].data['teacher_id'];
 				var def = deleteSI(sid);
 				def.done(function(){
 					if (rHO.delete) {
@@ -254,7 +253,6 @@ $(function($) {
 		var that = event.target;
 		//如果内容改变
 		var index = that.getAttribute('item');
-		console.log(qOA);
 		qOA[index].change = true;
 		qOA[index]['data'][that.classList[0]] = that.value;
 	});
@@ -263,7 +261,7 @@ $(function($) {
 	$qCNameBtnNd.on('click', function(event) {
 		event.preventDefault();
 		var qCId = $('select#cName').val(),
-			url = '/api/student/indexByCid/' + qCId,
+			url = '/api/teacher/indexByDid/' + qCId,
 			rstr = '';
 		var $req = $.ajax({
 			url: url,
@@ -292,10 +290,10 @@ $(function($) {
 		});
 	});
 
-	//删除学生信息
+	//删除教师信息
 	function deleteSI(sid) {
 		var def = $.Deferred();
-		var url = '/api/student/delete/'+sid;
+		var url = '/api/teacher/delete/'+sid;
 		var $req = $.ajax({
 			url: url,
 			type: 'DELETE',
@@ -321,7 +319,7 @@ $(function($) {
 	// 修改学生信息
 	function modifySI(sid,data,index) {
 		var def = $.Deferred();
-		var url = '/api/student/update/'+sid;
+		var url = '/api/teacher/update/'+sid;
 		var $req = $.ajax({
 			url: url,
 			type: 'PUT',
@@ -351,35 +349,35 @@ $(function($) {
 		qOA = [];
 		qRData.forEach(function(item,index){
 			var data = item,
-				qO = {},
+				qO = {}
 				qData = qO.data = {},
-				sId = qData['student_id'] = data['student_id'],
-				sName = qData['student_name'] = data['student_name'],
-				sSex = (data['student_sex'] == 1) ? '男' : '女',
-				sBir = qData['student_brith'] =data['student_brith'],
-				sAdress = qData['student_address'] = data['student_address'],
-				sPhone = qData['student_phoneNum'] = data['student_phoneNum'],
-				sEmail = qData['student_email'] =data['student_email'],
-				sIdCard = qData['student_idcard'] = data['student_idcard'],
-				sClasses = qData['student_classes_id'] = data['student_classes_id'];
-			qData['student_sex'] = data['student_sex'];
+				sId = qData['teacher_id'] = data['teacher_id'],
+				sName = qData['teacher_name'] = data['teacher_name'],
+				sSex = (data['teacher_sex'] == 1) ? '男' : '女',
+				sBir = qData['teacher_brith'] =data['teacher_brith'],
+				sAdress = qData['teacher_address'] = data['teacher_address'],
+				sPhone = qData['theacher_phoneNum'] = data['theacher_phoneNum'],
+				sEmail = qData['teacher_email'] =data['teacher_email'],
+				sIdCard = qData['teacher_idcard'] = data['teacher_idcard'],
+				sClasses = qData['teacher_department_id'] = data['teacher_department_id'];
+			qData['teacher_sex'] = data['teacher_sex'];
 			qO.change = false;
-			rstr += '<tr class="tableContentItem"><td><span class="student_id">' + sId +
-				'</span></td><td><input class="student_name" item="' + index + 
+			rstr += '<tr class="tableContentItem"><td><span class="teacher_id">' + sId +
+				'</span></td><td><input class="teacher_name" item="' + index + 
 				'" type="text" name="" value="'+ sName +
-				'"></td><td><input class="student_sex" item="' + index + 
+				'"></td><td><input class="teacher_sex" item="' + index + 
 				'" type="text" name="" value="' + sSex +
-				'"></td><td><input class="student_brith" item="' + index + 
+				'"></td><td><input class="teacher_brith" item="' + index + 
 				'" type="text" name="" value="'+ sBir +
-				'"></td><td><input class="student_address" item="' + index +
+				'"></td><td><input class="teacher_address" item="' + index +
 				'" type="text" name="" value="'+ sAdress + 
-				'"></td><td><input class="student_phoneNum" item="' + index +
+				'"></td><td><input class="theacher_phoneNum" item="' + index +
 				'" type="text" name="" value="' + sPhone + 
-				'"></td><td><input class="student_email" item="' + index + 
+				'"></td><td><input class="teacher_email" item="' + index + 
 				'" type="text" name="" value="' + sEmail + 
-				'"></td><td><input class="student_idcard" item="' + index + 
+				'"></td><td><input class="teacher_idcard" item="' + index + 
 				'" type="text" name="" value="' + sIdCard + 
-				'"></td><td><input class="student_classes_id" item="' + index +
+				'"></td><td><input class="teacher_department_id" item="' + index +
 				'" type="text" name="" value="' + sClasses + 
 				'"></td><td class="handle"><a href="javascript:;" class="modify" item="' + index +
 				'">修改</a>'+'<a href="javascript:;" class="delete" item="' + index +
@@ -391,7 +389,7 @@ $(function($) {
 });
 
 
-//学生信息添加模块
+//教师信息添加模块
 $(function(){
 	var $studentAddCntNd = $('#content #studentAddCnt'),
 		$qResultNd = $('#studentAddCnt .qResult'),
@@ -439,9 +437,9 @@ $(function(){
 		return $req;
 	}
 
-	// 班级列表信息查询
+	// 院系列表信息查询
 	function classesList(url) {
-		url = url || '/api/classes/index/';
+		url = url || '/api/department/index/';
 		var $req = $.ajax({
 			url: url,
 			type: 'GET',
@@ -464,10 +462,10 @@ $(function(){
 		return $req;
 	}
 
-	//确定添加学生信息
+	//确定添加教师信息
 	$qBtn.on('click', function(event) {
 		event.preventDefault();
-		var url = '/user/admin/studentUser';
+		var url = '/user/admin/teacherUser';
 		var $req = userStudent(url);
 		$req.done(function(data){
 			if (data.code == 1) {
@@ -487,17 +485,17 @@ $(function(){
 		event.preventDefault();
 		var that = event.target;
 
-		//判断是否是班级选择框
-		if (that.classList.contains('student_classes_id')) {
+		//判断是否是院系选择框
+		if (that.classList.contains('teacher_department_id')) {
 			var strOp = '';
 			if (classesO) {
 				var data = classesO.data;
 				data.forEach(function(item){
-					strOp += '<option value="' + item['classes_id'] + '">' + item['classes_name']+ '</option>';
+					strOp += '<option value="' + item['department_id'] + '">' + item['department_name']+ '</option>';
 				});
 			}
 			if (!strOp) {
-				strOp = '不存在班级信息';
+				strOp = '不存在院系信息';
 			}
 			that.innerHTML = strOp;
 		}
@@ -514,19 +512,19 @@ $(function(){
 			//得到行索引
 			var index = that.getAttribute('item');
 
-			//绑定确认框确认按钮的添加学生事件
+			//绑定确认框确认按钮的添加教师事件
 			$confirmNd.on('click', function(event) {
 				event.preventDefault();
 				$confirmboxNd.addClass('hide');
 				showHintBox($qResultHint);
 				var data = qOA[index].data;
 				console.log(data);
-				if (!data['student_name']) {
-					showHint($hintText, '必须输入学生名字');
+				if (!data['teacher_name']) {
+					showHint($hintText, '必须输入教师名字');
 					return;
 				}
-				if (!data['student_classes_id']) {
-					showHint($hintText, '必须选择班级');
+				if (!data['teacher_department_id']) {
+					showHint($hintText, '必须选择院系');
 					return;
 				}
 				var $req = addInf(data)
@@ -566,7 +564,7 @@ $(function(){
 		that.classList.remove('select');
 	});
 
-	//学生用户数据生成
+	//教师用户数据生成
 	function showRt(data) {
 		var rstr = '';
 		qOA = [];
@@ -574,33 +572,33 @@ $(function(){
 			var data = item,
 				qO = {}
 				qData = qO.data = {},
-				sId = qData['student_id'] = data['user_id'],
-				sName = qData['student_name'] = '',
-				sBir = qData['student_brith'] = '',
-				sAdress = qData['student_address'] = '',
-				sPhone = qData['student_phoneNum'] = '',
-				sEmail = qData['student_email'] = '',
-				sIdCard = qData['student_idcard'] = '',
-				sClasses = qData['student_classes_id'] = '';
-			qData['student_sex'] = '2';
+				sId = qData['teacher_id'] = data['user_id'],
+				sName = qData['teacher_name'] = '',
+				sBir = qData['teacher_brith'] = '',
+				sAdress = qData['teacher_address'] = '',
+				sPhone = qData['teacher_phoneNum'] = '',
+				sEmail = qData['teacher_email'] = '',
+				sIdCard = qData['teacher_idcard'] = '',
+				sClasses = qData['teacher_department_id'] = '';
+			qData['teacher_sex'] = '2';
 			qO.change = false;
-			rstr += '<tr class="tableContentItem"><td><span class="student_id">' + sId +
-				'</span></td><td><input class="student_name" item="' + index + 
+			rstr += '<tr class="tableContentItem"><td><span class="teacher_id">' + sId +
+				'</span></td><td><input class="teacher_name" item="' + index + 
 				'" type="text" name="" value="'+ sName +
-				'"></td><td><select class="student_sex hintSel" item="' + index + 
+				'"></td><td><select class="teacher_sex hintSel" item="' + index + 
 				'"><option value="2">女</option><option value="1">男</option></select></td>'+
-				'<td><input class="student_brith" item="' + index + 
+				'<td><input class="teacher_brith" item="' + index + 
 				'" type="text" name="" value="'+ sBir +
-				'"></td><td><input class="student_address" item="' + index +
+				'"></td><td><input class="teacher_address" item="' + index +
 				'" type="text" name="" value="'+ sAdress + 
-				'"></td><td><input class="student_phoneNum" item="' + index +
+				'"></td><td><input class="teacher_phoneNum" item="' + index +
 				'" type="text" name="" value="' + sPhone + 
-				'"></td><td><input class="student_email" item="' + index + 
+				'"></td><td><input class="teacher_email" item="' + index + 
 				'" type="text" name="" value="' + sEmail + 
-				'"></td><td><input class="student_idcard" item="' + index + 
+				'"></td><td><input class="teacher_idcard" item="' + index + 
 				'" type="text" name="" value="' + sIdCard + 
-				'"></td><td> <select class="student_classes_id hintSel" item="' + index + 
-				'"><option>选择班级</option></select>'+
+				'"></td><td> <select class="teacher_department_id hintSel" item="' + index + 
+				'"><option>选择院系</option></select>'+
 				'</td><td class="handle"><a href="javascript:;" class="add" item="' + index +
 				'">添加</a></td></tr>';
 			$tContentNd[0].innerHTML = rstr;
@@ -608,9 +606,9 @@ $(function(){
 		});
 	}
 
-	// 添加学生信息
+	// 添加教师信息
 	function addInf(data,url){
-		url = url || '/api/student/add/';
+		url = url || '/api/teacher/add/';
 		$req = $.ajax({
 			url: url,
 			type: 'POST',
@@ -625,7 +623,7 @@ $(function(){
 });
 
 
-//学生密码重置模块
+//教师密码重置模块
 $(function(){
 	var $eBtnNd = $('#studentResetPassCnt .eBtn'),
 		$sIdNd = $('#studentResetPassCnt .sId'),
@@ -644,14 +642,14 @@ $(function(){
 		//判断是否输入
 		if ($sIdNd.val().length == 0) {
 			showHintBox($qResultHint);
-			showHint($hintText,'请输入要查询学生的id');
+			showHint($hintText,'请输入要查询教师的id');
 			return;
 		} else if (!sidReg.test($sIdNd.val())) {
 			showHintBox($qResultHint);
-			showHint($hintText, '请输入正确的学生id');
+			showHint($hintText, '请输入正确的教师id');
 			return;
 		}
-		var $req = studentPassReset($sIdNd.val())
+		var $req = teacherPassReset($sIdNd.val())
 			.done(function(data){
 				showHint($hintText, data.message);
 			})
@@ -663,9 +661,9 @@ $(function(){
 			});
 	});
 
-	//学生密码重置
-	function studentPassReset(id,url) {
-		url = url || ('/user/admin/studentPassReset/' + id);
+	//教师密码重置
+	function teacherPassReset(id,url) {
+		url = url || ('/user/admin/teacherPassReset/' + id);
 		var $req = $.ajax({
 			url: url,
 			type: 'PUT',

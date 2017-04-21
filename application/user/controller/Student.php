@@ -2,17 +2,33 @@
 namespace app\user\controller;
 
 use think\Controller;
+use think\Db;
 
 class Student extends Controller
 {
-	// student主页
-	public function home()
+	//判断用户是否登录
+	private function isLogin()
 	{
 		$ulogin = ulogin();
 		if (!$ulogin) {
-			redirect('/user/index/index');
+			$this->redirect('/user/index/index/');
+			return;
 		}
-		$userName = $ulogin['userId'];
+		if ($ulogin['userAuth'] == 2) {
+			$this->redirect('/user/teacher/home/');
+			return;
+		} elseif ($ulogin['userAuth'] == 1) {
+			$this->redirect('/user/admin/home/');
+			return;
+		}
+	}
+	// student主页
+	public function home()
+	{
+		$this->isLogin();
+		$userId = $ulogin['userId'];
+		$user = Db::table('student')->where('student_id', $userId)->select();
+		$userName = $user[0]['student_name'];
 		$this->assign('userName', $userName);
 		return $this->fetch();
 	}
@@ -30,33 +46,31 @@ class Student extends Controller
 		}
 	}
 
-	// 选课
-	public function takeCourse()
+	//student信息管理
+	public function information()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 修改密码
-	public function modifyPass()
+	//student课程管理
+	public function course()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 查看信息
-	public function viewInformation()
+	//student成绩管理
+	public function score()
 	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 
-	// 修改信息
-	public function modifyInformation()
+	//student账号管理
+	public function student()
 	{
-		;
-	}
-
-	// 查看成绩
-	public function viewGrade()
-	{
-		;
+		$this->isLogin();
+		return $this->fetch();
 	}
 }
