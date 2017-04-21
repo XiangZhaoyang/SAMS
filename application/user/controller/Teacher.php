@@ -27,6 +27,7 @@ class Teacher extends Controller
 	public function home()
 	{
 		$this->isLogin();
+		$ulogin = ulogin();
 		$userId = $ulogin['userId'];
 		$user = Db::table('student')->where('teacher_id', $userId)->select();
 		$userName = $user[0]['teacher_name'];
