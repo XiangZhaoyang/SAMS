@@ -1,0 +1,296 @@
+body{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	color: rgb(170,170,170);
+	background-color: rgb(245,239,239);
+}
+
+#container{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	position: relative;
+	overflow: hidden;
+}
+
+#nav{
+	position: absolute;
+	left: 0;
+	width: 17%;
+	min-width: 170px;
+	height: 100%;
+	color: rgb(255,255,255);
+	background-color: rgb(66,66,66);
+	/*禁止ff浏览器双击选中文字*/
+	-moz-user-select: none;
+}
+#nav .navItem{
+	width: 100%;
+	height: 50px;
+	display: block;
+	line-height: 50px;
+	text-align: center;
+	font-size: 20px;
+	color: rgb(200,200,200);
+}
+#nav .navItem:hover{
+	color: rgb(250,250,250);
+	background-color: rgb(22,22,22);
+}
+#nav .select{
+	background-color: rgb(33,33,33);
+}
+
+#content{
+	position: absolute;
+	right: 0;
+	width: 83%;
+	height: 100%;
+	min-width: 830px;
+	overflow: auto;
+}
+
+/*确认框*/
+.confirmbox{
+	position: fixed;
+	left: 30%;
+	top: 30%;
+	width: 30%;
+	min-width: 400px;
+	min-height: 300px;
+	height: 30%;
+	border-radius: 2px;
+	background-color: rgb(30,44,55);
+}
+.confirmboxHint{
+	position: absolute;
+	width: 100%;
+	height: 50px;
+	font-size: 30px;
+	line-height: 50px;
+	text-align: center;
+	top: 20%;
+}
+.confirmbox .cancelbox{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	width: 50px;
+	height: 50px;
+	font-size: 30px;
+	border-radius: 25px;
+	line-height: 40px;
+	text-align: center;
+	background-color: rgb(15,22,25);
+	color: rgb(255,255,255);
+}
+.confirmbox .cancelbox:hover{
+	background-color: rgb(5,2,5);
+}
+.confirmbox .confirmboxItem{
+	display: block;
+	top: 50%;
+	position: absolute;
+	width: 150px;
+	height: 50px;
+	font-size: 40px;
+	border-radius: 6px;
+	line-height: 50px;
+	text-align: center;
+	background-color: rgb(15,22,25);
+	color: rgb(255,255,255);
+}
+.confirmbox .confirmboxItem:hover{
+	background-color: rgb(5,2,5);
+}
+.confirmbox .confirm{
+	left: 10%;
+}
+.confirmbox .cancel{
+	right: 10%;
+}
+
+
+#content .navCntItem{
+	width: 98%;
+	height: 98%;
+	position: relative;
+	margin: 0 auto;
+	min-width: 900px;
+	font-size: 16px;
+}
+
+.hint{
+	color: rgb(33,44,55);
+}
+
+.hint1{
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	font-size: 20px;
+	border-radius: 10px;
+	text-align: center;
+	background-color: rgb(66,88,110);
+	color: rgb(12,22,25);
+}
+.hint1:hover{
+	background-color: rgb(44,66,88);
+}
+.hintInp{
+	color: #549D79;
+}
+.hintSel{
+	color: #549D79;
+}
+.hintBox {
+	position: fixed;
+	left: 40%;
+	top: 30%;
+	width: 30%;
+	min-width: 400px;
+	min-height: 300px;
+	height: 30%;
+	border-radius: 2px;
+	background-color: rgb(30,44,55);
+}
+.hintBox .hintText{
+	position: absolute;
+	width: 100%;
+	height: 50px;
+	font-size: 30px;
+	line-height: 50px;
+	text-align: center;
+	top: 40%;
+	color: rgb(255,255,255);
+}
+
+.qResult{
+	width: 95%;
+	height: 90%;
+	margin: 2% auto;
+	background-color: rgb(200,200,200);
+	overflow: auto;
+	border-radius: 6px;
+}
+
+
+.rTable{
+	width: 99%;
+	padding: 0;
+	margin: 0 auto;
+	color: rgb(66,66,66);
+	border-collapse:collapse;
+}
+.rTable th{
+	height: 30px;
+}
+.rTable .tableTile{
+	color: rgb(44,44,44);
+	background-color: rgb(133,133,133);
+}
+.rTable .tableTile th{
+	width: 10%;
+	border: 1px solid rgb(22,22,22);
+}
+.rTable .tableContentItem td{
+	border: 1px solid rgb(44,44,44);
+	padding: 0px;
+}
+.rTable td{
+	height: 50px;
+	line-height: 50px;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}
+
+.rTable .tContent tr td input{
+	height: 100%;
+	width: 100%;
+	border: none;
+	text-align: center;
+	color: rgb(22,22,22);
+	background-color: rgb(230,230,230);
+}
+.rTable .tContent tr:hover td input,.rTable .tContent tr:nth-child(odd):hover td input{
+	background-color: #6E9695;
+}
+.rTable .tContent tr td input.select{
+	color: rgb(255,255,225);
+	background-color: #6F897A;
+}
+.rTable .tContent tr td.handle{
+	min-width: 100px;
+	background-color: #697F96;
+}
+.rTable .tContent tr td span{
+	display: inline-block;
+	height: 50px;
+	width: 100%;
+	line-height: 50px;
+	color: rgb(255,255,255);
+	background-color: #475A6F;
+}
+.rTable .tContent tr td.handle a{
+	display: inline-block;
+	width: 40%;
+	height: 40px;
+	margin-top: 5px;
+	line-height: 40px;
+	border-radius: 4px;
+	font-weight: bold;
+	color: rgb(255,255,255);
+}
+.rTable .tContent tr td.handle a.modify{
+	background-color: #F0B236;
+}
+.rTable .tContent tr td.handle a.modify:hover{
+	background-color: #FE7C49;
+}
+.rTable .tContent tr td.handle a.delete{
+	background-color: #F57981;
+}
+.rTable .tContent tr td.handle a.delete:hover{
+	background-color: #FA2B2F;
+}
+.rTable .tContent tr:nth-child(odd) td input{
+	background-color: #A2BAA8;
+}
+.rTable .tContent tr:nth-child(odd) td input.select{
+	color: rgb(255,255,225);
+	background-color: #6F897A;
+}
+
+/*添加信息模块*/
+.rTable .tContent tr td.handle a.add{
+	background-color: #F0B236;
+}
+.rTable .tContent tr td.handle a.add:hover{
+	background-color: #FE7C49;
+}
+.rTable .tContent tr td .hintSel{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	border: none;
+	color: rgb(25,25,25);
+	background-color: rgb(230,230,230);
+}
+.rTable .tContent tr td .hintSel option{
+	display: inline-block;
+	color: #405061;
+	text-align: center;
+}
+.rTable .tContent tr:nth-child(odd) td .hintSel{
+	background-color: #A2BAA8;
+}
+.rTable .tContent tr td .hintSel.select{
+	color: rgb(255,255,225);
+	background-color: #6F897A;
+}
+.rTable .tContent tr td .hintSel:hover{
+	background-color: #6E9695;
+}

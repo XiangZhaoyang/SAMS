@@ -1,5 +1,5 @@
 <?php
-namespace app\user\contrller;
+namespace app\user\controller;
 
 use think\Controller;
 use think\Db;
@@ -29,7 +29,7 @@ class Teacher extends Controller
 		$this->isLogin();
 		$ulogin = ulogin();
 		$userId = $ulogin['userId'];
-		$user = Db::table('student')->where('teacher_id', $userId)->select();
+		$user = Db::table('teacher')->where('teacher_id', $userId)->select();
 		$userName = $user[0]['teacher_name'];
 		$this->assign('userName', $userName);
 		return $this->fetch();
