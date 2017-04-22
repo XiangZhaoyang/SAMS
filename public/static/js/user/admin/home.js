@@ -72,7 +72,8 @@ $(function() {
 		.done(function(data){
 			if (data.code == 1) {
 				setTimeout(function(){
-					window.location.href = data.url;
+					var baseId = $('#baseId')[0];
+					window.location.href = baseId + data.url;
 				}, 1000);
 			} else if (data.code == 0) {
 				setTimeout(function(){

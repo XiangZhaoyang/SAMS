@@ -59,7 +59,7 @@ class Student extends Controller
 			return json_return(null, '用户权限不够，信息操作失败', 0);
 		}
 		$id = session('userId');
-		$qstr = 'select student*,classes.classes_name as student_classes_name from student,classes where student.classes_id = classes.classes_id and student.studenet_id =?';
+		$qstr = 'select student.*,classes.classes_name as student_classes_name from student,classes where student.student_classes_id = classes.classes_id and student.student_id =?';
 		$sInf = Db::query($qstr, [$id]);
 		if ($sInf) {
 			return json_return($sInf[0], '学生基本信息查询成功', 1);
@@ -84,13 +84,6 @@ class Student extends Controller
 
 	//student成绩管理
 	public function score()
-	{
-		$this->isLogin();
-		return $this->fetch();
-	}
-
-	//student账号管理
-	public function student()
 	{
 		$this->isLogin();
 		return $this->fetch();
