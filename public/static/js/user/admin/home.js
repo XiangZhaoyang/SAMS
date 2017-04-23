@@ -73,7 +73,7 @@ $(function() {
 			if (data.code == 1) {
 				setTimeout(function(){
 					var baseId = $('#baseId')[0];
-					window.location.href = baseId + data.url;
+					window.location.href = baseId.href + data.url;
 				}, 1000);
 			} else if (data.code == 0) {
 				setTimeout(function(){

@@ -191,7 +191,7 @@ body{
 	background-color: rgb(133,133,133);
 }
 .rTable .tableTile th{
-	width: 10%;
+	width: 9%;
 	border: 1px solid rgb(22,22,22);
 }
 .rTable .tableContentItem td{
@@ -200,10 +200,11 @@ body{
 }
 .rTable td{
 	height: 50px;
-	line-height: 50px;
 	padding: 0;
 	margin: 0;
+	overflow: hidden;
 	text-align: center;
+	background-color: #475A6F;
 }
 
 .rTable .tContent tr td input{
@@ -231,6 +232,7 @@ body{
 	width: 100%;
 	line-height: 50px;
 	color: rgb(255,255,255);
+	overflow: auto;
 	background-color: #475A6F;
 }
 .rTable .tContent tr td.handle a{
@@ -293,4 +295,23 @@ body{
 }
 .rTable .tContent tr td .hintSel:hover{
 	background-color: #6E9695;
+}
+.passOldHint{
+	color: #F5B047;
+}
+.passNew1Hint{
+	color: #F15C68;
+}
+.passNeweHint{
+	color: #F91010;
+}
+.mBtn{
+	display: inline-block;
+	width: 10%;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 20px;
+	text-align: center;
+	color: #FD8B54;
+	/*background-color: #E3AA70;*/
 }

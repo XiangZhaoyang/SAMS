@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>学生管理</title>
+	<title>教师信息管理</title>
 	<link rel="stylesheet" type="text/css" href="/static/css/common.css">
 	<link rel="stylesheet" href="/static/css/user/teacher/information.css">
 	<script type="text/javascript" src="/static/js/jquery.js"></script>
@@ -11,97 +11,17 @@
 <body onselectstart="return false;">
 	<div id="container">
 		<div id="nav"  onselectstart="return false;">
-			<a href="javascript:;" class="studentModifyInf navItem select">学生信息管理</a>
-			<a href="javascript:;" class="teacherAccountManage navItem">密码修改</a>
+			<a href="javascript:;" class="studentInf navItem select">个人信息</a>
+			<a href="javascript:;" class="studentAccountManage navItem">密码修改</a>
 		</div>
 		<div id="content">
-			<!-- 学生信息查询修改模块 -->
-			<div id="studentModifyInfCnt" class="navCntItem">
-				<h3 class="hint">请选择查询条件:</h3>
-				<a href="javascript:;" class="qId hint1">根据学生id查询</a>
-				<a href="javascript:;" class="qClasses hint1">根据班级查询</a>
-				<label class="hint hide qIdHint">请输入学生id:
-					<input type="text" name="" value="" id="sId" class="hintInp">
-					<a href="javascript:;" class="qIdBtn hint1">确定</a>
-				</label>
-				<label class="hint hide qCNameHint">请选择班级：
-					<select id="cName" class='hintSel'>
-					<!-- <option value=""></option> -->
-					</select>
-					<a href="javascript:;" class="qCNameBtn hint1">确定</a>
-				</label>
-				<div class="qResultHint hintBox hide">
-					<h3 class="hintText"></h3>
-				</div>
-
-				<!-- 查询结果显示 -->
-				<div class="qResult">
-					<table class="rTable">
-						<thead>
-							<tr class="tableTile">
-								<th>学号</th>
-								<th>姓名</th>
-								<th>性别</th>
-								<th>出生日期</th>
-								<th>家庭住址</th>
-								<th>联系电话</th>
-								<th>电子邮箱</th>
-								<th>身份证码</th>
-								<th>班级</th>
-								<th>操作</th>
-							</tr>
-						</thead>
-						<tbody class="tContent">
-							<!-- <tr class="tableContentItem">
-								<td>
-									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf" class="select">
-								</td>
-								<td>
-									<input type="text" name="" value="dfasdfsadfasfd">
-								</td>
-								<td>
-									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
-								</td>
-								<td>
-									<input type="text" name="" value="dfasdfsadfasfd">
-								</td>
-								<td>
-									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
-								</td>
-								<td>
-									<input type="text" name="" value="dfasdfsadfasfd">
-								</td>
-								<td>
-									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
-								</td>
-								<td>
-									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
-								</td>
-								<td>
-									<input type="text" name="" value="dfasdfsadfasfd">
-								</td>
-								<td class="handle">
-									<a href="javascript:;" class="modify">修改</a>
-									<a href="javascript:;" class="delete">删除</a>
-								</td>
-							</tr> -->
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-			<!-- 学生信息添加模块 -->
-			<div id="studentAddCnt" class="navCntItem hide">
-				<h3 class="hint">是否确定添加信息？
-				<a href="javascript:;" class="qBtn hint1">确定</a></h3>
-				<div class="qResultHint hintBox hide">
-					<h3 class="hintText"></h3>
-				</div>
+			<!-- 学生信息模块 -->
+			<div id="studentInfCnt" class="navCntItem">
 				<div class="qResult">
 					<table class="rTable">
 							<thead>
 								<tr class="tableTile">
-									<th>学号</th>
+									<th>教师编号</th>
 									<th>姓名</th>
 									<th>性别</th>
 									<th>出生日期</th>
@@ -109,7 +29,8 @@
 									<th>联系电话</th>
 									<th>电子邮箱</th>
 									<th>身份证码</th>
-									<th>班级</th>
+									<th>院系</th>
+									<th>更多信息</th>
 									<th>操作</th>
 								</tr>
 							</thead>
@@ -149,13 +70,21 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="qResultHint hintBox hide">
+						<h3 class="hintText"></h3>
+					</div>
 			</div>
 
-			<!-- 学生密码重置模块 -->
-			<div id="studentResetPassCnt" class="navCntItem hide">
-				<h3 class="hint">请输入要重置密码学生的id:</h3>
-				<input type="text" name="" value="" class="hintInp sId">
-				<a href="javascript:;" class="eBtn hint1">确定</a>
+			<!-- 学生密码修改模块 -->
+			<div id="studentAccountManageCnt" class="navCntItem hide">
+				<h3 class="hint passOldHint">请输入密码:</h3>
+				<input type="password" name="" value="" class="hintInp sPass">
+				<h3 class="hint passNew1Hint">请输入新密码:</h3>
+				<input type="password" name="" value="" class="hintInp sNewPass1">
+				<h3 class="hint passNeweHint">请确认新密码:</h3>
+				<input type="password" name="" value="" class="hintInp sNewPass2">
+				<br>
+				<a href="javascript:;" class="mBtn hint1">确定</a>
 				<div class="qResultHint hintBox hide">
 					<h3 class="hintText"></h3>
 				</div>

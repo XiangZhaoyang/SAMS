@@ -17,6 +17,8 @@ return [
         'id'   => '\d+',
         'sid'  => '\d+',
         'cid'  => '\d+',
+        'pass' => '\w+',
+        'newpass' => '\w+',
     ],
 
     '[api/user]'            => [
@@ -80,6 +82,14 @@ return [
     '[user/admin]'              =>[
         '/studentPassReset/:id' => ['user/admin/studentPasswordReset', ['method' => 'put']],
         '/teacherPassReset/:id' => ['user/admin/teacherPasswordReset', ['method' => 'put']],
+    ],
+
+    '[user/student]'            => [
+        '/reSetPass/:pass/:newpass' => ['user/student/reSetPass', ['method' => 'put']]
+    ],
+
+    '[user/teacher]'            => [
+        '/reSetPass/:pass/:newpass' => ['user/teacher/reSetPass', ['method' => 'put']],
     ],
 
     // '[user/index]'              => [

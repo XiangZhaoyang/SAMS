@@ -62,9 +62,9 @@ class Student extends Controller
 		$qstr = 'select student.*,classes.classes_name as student_classes_name from student,classes where student.student_classes_id = classes.classes_id and student.student_id =?';
 		$sInf = Db::query($qstr, [$id]);
 		if ($sInf) {
-			return json_return($sInf[0], '学生基本信息查询成功', 1);
+			return json_return($sInf[0], '基本信息查询成功', 1);
 		} else {
-			return json_return(null, '学生基本信息查询失败，请稍后再试', 0);
+			return json_return(null, '基本信息查询失败，请稍后再试', 0);
 		}
 	}
 
@@ -73,6 +73,30 @@ class Student extends Controller
 	{
 		$this->isLogin();
 		return $this->fetch();
+	}
+
+	//学生密码修改
+	public function reSetPass($pass, $newpass) {
+		$ulogin = ulogin();
+		if (!$ulogin) {
+			return json_return(null, '用户未登录，信息操作失败', 0);
+		}
+		if ($ulogin['userAuth'] != 3) {
+			return json_return(null, '用户权限不够，信息操作失败', 0);
+		}
+		$sid = $ulogin['userId'];
+		$user = Db::table('user')->where('user_id', $sid)->select();
+		$passTrue = password_verify($pass, $user[0]['user_pass']);
+		if (!$passTrue) {
+			return json_return(false, '密码错误，密码修改失败', 0);
+		}
+		$strPass = password_hash($newpass, PASSWORD_DEFAULT);
+		$pass = Db::table('user')->where('user_id', $sid)->update(['user_pass' => $strPass]);
+		if ($pass) {
+			return json_return(true, '密码修改成功', 1);
+		} else{
+			return json_return(false, '密码修改失败，请稍后再试', 0);
+		}
 	}
 
 	//student课程管理
