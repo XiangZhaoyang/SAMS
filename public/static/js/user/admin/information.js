@@ -12,46 +12,6 @@ function showHint($node,message) {
 	$node[0].innerText = message;
 }
 
-//导航处理
-$(function(){
-	var $navNd = $('#nav'),
-		$studentInfNd = $('#nav .studentInf'),
-		$studentAcManageNd = $('#nav .studentAccountManage'),
-		$studentInfCntNd = $('#content #studentInfCnt'),
-		$studentAcManageCntNd = $('#content #studentAccountManageCnt');
-
-	$navNd.on('click', function(event) {
-		event.preventDefault();
-		var that = event.target;
-		switch (that) {
-			case $studentInfNd[0]: {
-				$studentInfNd.addClass('select');
-				$studentAcManageNd.removeClass('select');
-				$studentInfCntNd.removeClass('hide').addClass('show');
-				$studentAcManageCntNd.removeClass('show').addClass('hide');
-			}
-			break;
-			case $studentAcManageNd[0]: {
-				$studentAcManageNd.addClass('select');
-				$studentInfNd.removeClass('select');
-				$studentInfCntNd.removeClass('show').addClass('hide');
-				$studentAcManageCntNd.removeClass('hide').addClass('show');
-			}
-			break;
-		}
-	});
-});
-
-
-
-//管理员密码重置
-$(function(){
-	//管理员密码修改函数
-	
-});
-
-
-
 
 //管理员密码修改模块
 $(function() {

@@ -82,9 +82,9 @@ return [
     '[user/admin]'              =>[
         '/studentPassReset/:id' => ['user/admin/studentPasswordReset', ['method' => 'put']],
         '/teacherPassReset/:id' => ['user/admin/teacherPasswordReset', ['method' => 'put']],
-        '/modifyPass/:pass/:newpass' => ['user/admin/modifyPass', ['method' => 'put']],
-        '/passReset' => ['user/passReset', ['method' => 'put'],
-    ],
+        '/modifyPass/:pass/:newpass' => ['user/admin/modifyPass' , ['method' => 'put']],
+        '/passReset' => ['user/passReset' , ['method' => 'put']]
+        ],
 
     '[user/student]'            => [
         '/reSetPass/:pass/:newpass' => ['user/student/reSetPass', ['method' => 'put']]
