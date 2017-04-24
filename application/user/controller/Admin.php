@@ -120,8 +120,46 @@ class Admin extends Controller
 		}
 	}
 
+	//管理员密码重置
+	public function passReset()
+	{
+		$this->logout();
+		$id = session('userId');
+		$strPass = password_hash('123456', PASSWORD_DEFAULT);
+		$pass = Db::table('user')->where('user_id', $id)->update(['user_pass' => $strPass]);
+		if ($pass) {
+			return json_return(true, '密码重置成功', 1);
+		} elseif($pass) {
+			return json_return(null, '密码重置失败,稍后再试', 0);
+		}
+	}
+
+	//管理员密码修改
+	public function modifyPass($pass, $newpass) {
+		$ulogin = ulogin();
+		if (!$ulogin) {
+			return json_return(null, '用户未登录，信息操作失败', 0);
+		}
+		if ($ulogin['userAuth'] != 1) {
+			return json_return(null, '用户权限不够，信息操作失败', 0);
+		}
+		$sid = $ulogin['userId'];
+		$user = Db::table('user')->where('user_id', $sid)->select();
+		$passTrue = password_verify($pass, $user[0]['user_pass']);
+		if (!$passTrue) {
+			return json_return(false, '密码错误，密码修改失败', 0);
+		}
+		$strPass = password_hash($newpass, PASSWORD_DEFAULT);
+		$pass = Db::table('user')->where('user_id', $sid)->update(['user_pass' => $strPass]);
+		if ($pass) {
+			return json_return(true, '密码修改成功', 1);
+		} else{
+			return json_return(false, '密码修改失败，请稍后再试', 0);
+		}
+	}
+
 	//账号管理
-	public function admin()
+	public function information()
 	{
 		$this->isLogin();
 		return $this->fetch();

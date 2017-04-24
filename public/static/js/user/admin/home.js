@@ -15,7 +15,7 @@ $(function() {
 		classesManage: '/user/admin/classes/',
 		scoreManage: '/user/admin/score/',
 		userManage: '/user/admin/user/',
-		accountManage: '/user/admin/admin'
+		accountManage: '/user/admin/information'
 	};
 
 	$navNode.on('click', function(event) {
