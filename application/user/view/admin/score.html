@@ -3,8 +3,68 @@
 <head>
 	<meta charset="UTF-8">
 	<title>成绩管理</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+	<link rel="stylesheet" href="/static/css/user/admin/score.css">
+	<script type="text/javascript" src="/static/js/jquery.js"></script>
+	<script type="text/javascript" src="/static/js/user/admin/score.js"></script>
 </head>
-<body>
-	成绩管理
+<body onselectstart="return false;">
+	<div id="container">
+		<div id="nav"  onselectstart="return false;">
+			<a href="javascript:;" class="studentModifyInf navItem select">生成班级成绩表</a>
+		</div>
+		<div id="content">
+			<!-- 成绩表生成模块 -->
+			<div id="studentModifyInfCnt" class="navCntItem">
+				<!-- 查询结果显示 -->
+				<label class="hint qCNameHint">
+					<select id="cName" class='hintSel'>
+					<option value="">请选择班级</option>
+					</select>
+					<a href="javascript:;" class="qCNameBtn hint1">确定</a>
+				</label>
+				<div class="qResult">
+					<table class="rTable">
+						<thead>
+							<tr class="tableTile">
+								<th>班级编号</th>
+								<th>班级名称</th>
+								<th>班级院系</th>
+								<th>班级专业</th>
+								<th>班级信息</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody class="tContent">
+							<!-- <tr class="tableContentItem">
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf" class="select">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+								<td class="handle">
+									<a href="javascript:;" class="modify">修改</a>
+									<a href="javascript:;" class="delete">删除</a>
+								</td>
+							</tr> -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- 确认框框 -->
+			<div class="confirmbox hide">
+				<h2 class="confirmboxHint">是否确定？</h2>
+				<a href="javascript:;" class='cancelbox'>x</a>
+				<a href="javascript:;" class="confirm confirmboxItem">确定</a>
+				<a href="javascript:;" class="cancel confirmboxItem">取消</a>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

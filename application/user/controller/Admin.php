@@ -193,6 +193,25 @@ class Admin extends Controller
 		return $this->fetch();
 	}
 
+	//班级基本信息查询
+	public function cInfQuery()
+	{
+		$ulogin = ulogin();
+		if (!$ulogin) {
+			return json_return(null, '用户未登录，信息操作失败', 0);
+		}
+		if ($ulogin['userAuth'] != 1) {
+			return json_return(null, '用户权限不够，信息操作失败', 0);
+		}
+		$qstr = 'select classes.*,department.department_name as classes_department_name from classes,department where classes.classes_department_id = department.department_id ';
+		$sInf = Db::query($qstr);
+		if ($sInf) {
+			return json_return($sInf, '班级息查询成功', 1);
+		} else {
+			return json_return(null, '班级信息查询失败，请稍后再试', 0);
+		}
+	}
+
 	//用户管理
 	public function user()
 	{

@@ -10,11 +10,9 @@ $(function() {
 	var href = {
 		studentManage: '/user/admin/student/',
 		teacherManage: '/user/admin/teacher/',
-		courseManage: '/user/admin/course/',
 		departmentManage: '/user/admin/department/',
 		classesManage: '/user/admin/classes/',
 		scoreManage: '/user/admin/score/',
-		userManage: '/user/admin/user/',
 		accountManage: '/user/admin/information'
 	};
 

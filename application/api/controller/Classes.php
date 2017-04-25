@@ -130,7 +130,7 @@ class Classes extends Base
 			if (!$classes) {
 				return json_return(null, '不存这个班级,修改班级信息失败', 0);
 			}
-			if ($classes->allowField(true)->save('put.')) {
+			if ($classes->allowField(true)->save(input('put.'))) {
 				return json_return($classes->classes_id, '班级信息修改成功', 1);
 			} else {
 				return json_return(null, '班级信息修改失败', 0);
