@@ -49,7 +49,7 @@ class Score extends Base
 		if (!$this->userId) {
 			return json_return(null, '用户未登录，成绩信息添加失败', 0);
 		}
-		if ($this->userAuth == 3) {
+		if ($this->userAuth == 1) {
 			$score = ScoreModel::get(['score_course_id' => input('post.score_course_id'), 'score_student_id' => input('post.score_student_id')]);
 			if ($score) {
 				return json_return(null, '该成绩信息已存在，添加失败', 0);
@@ -62,6 +62,33 @@ class Score extends Base
 			}
 		} else {
 			return json_return(null, '用户权限不够，成绩信息添加失败', 0);
+		}
+	}
+
+	//添加一个班的成绩
+	public function addByClasses($courseid,$classesid)
+	{
+		if (!$this->userId) {
+			return json_return(null, '用户未登录，成绩信息添加失败', 0);
+		}
+		$str = 'select student_id from student where student_classes_id = ?';
+		$student_id = Db::query($str, $cid);
+		if (!$student_id) {
+			return json_return(null, '不存在此班级学生，成绩表添加失败', 0);
+		}
+		$list = [];
+		if ($this->userAuth == 1) {
+			$score = new ScoreModel;
+			foreach ($student_id as $key => $value) {
+				array_push($score, ['score_course_id' => $courseid, 'score_student_id' => $value]);
+			}
+			if ($score->saveAll($list)) {
+				return json_return(true, '成绩表添加成功', 1);
+			} else {
+				return json_return($score->getError(), '成绩表添加失败', 0);
+			}
+		} else {
+			return json_return(null, '用户权限不够，成绩表添加失败', 0);
 		}
 	}
 

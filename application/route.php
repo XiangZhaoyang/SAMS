@@ -59,6 +59,7 @@ return [
         '/add'          => ['api/score/add', ['method' => 'post']],
         '/update/:sid/:cid'   => ['api/score/update', ['method' => 'put']],
         '/delete/:sid/:cid'    => ['api/score/delete', ['method' => 'delete']],
+        'addByCid/:courseid/:classesid' => ['api/score/addByClasses', ['method' => 'post']],
     ],
 
     '[api/student]'           => [
@@ -85,6 +86,7 @@ return [
         '/modifyPass/:pass/:newpass' => ['user/admin/modifyPass' , ['method' => 'put']],
         '/passReset' => ['user/passReset' , ['method' => 'put']]
         ],
+        '/classesCourse/:cid'   => ['user/admin/classesCourse', ['method' => 'get']],
 
     '[user/student]'            => [
         '/reSetPass/:pass/:newpass' => ['user/student/reSetPass', ['method' => 'put']]

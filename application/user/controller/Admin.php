@@ -179,6 +179,24 @@ class Admin extends Controller
 		return $this->fetch();
 	}
 
+	// 根据班级id查询未添加的课程
+	public function classesCourse($cid) 
+	{
+		$this->isLogin();
+		$str = 'select * from classes where classes_id =?';
+		$classes = Db::query($str, $cid);
+		if (!$classes) {
+			return json_return(null, '不存在此班级，信息查询失败', 0);
+		}
+		$str = 'select classes.classes_id,classes.classes_name,course.course_id as classes_course_id,coursr_name as classes_course_name from classes,course where classes.classes_id = course_classes_id and course_add = 0 and classes =?';
+		$rt = Db::query($str, $cid);
+		if ($rt) {
+			return json_return($rt, '信息查询成功', 1);
+		} else {
+			return json_return(null, '信息查询失败', 0);
+		}
+	}
+
 	//院系管理
 	public function department()
 	{
