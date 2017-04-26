@@ -27,7 +27,7 @@ class Classes extends Base
 				return json_return(null, '班级列表信息查询失败', 0);
 			}
 		} elseif ($this->userAuth == 2) {
-			$strQuery = 'select classes.* from classes, course where classes.classes_id = course.course_classes_id and course.course_teacher_id=? ';
+			$strQuery = 'select classes.*,count(distinct classes.classes_id) from classes, course where classes.classes_id = course.course_classes_id and course.course_teacher_id=? ';
 			$classes = Db::query($strQuery, [$this->userId]);
 			if ($classes) {
 				return json_return($classes, '班级信息查询成功', 1);

@@ -2,69 +2,97 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>成绩管理</title>
+	<title>学生成绩管理</title>
 	<link rel="stylesheet" type="text/css" href="/static/css/common.css">
-	<link rel="stylesheet" href="/static/css/user/admin/score.css">
+	<link rel="stylesheet" href="/static/css/user/teacher/score.css">
 	<script type="text/javascript" src="/static/js/jquery.js"></script>
-	<script type="text/javascript" src="/static/js/user/admin/score.js"></script>
+	<script type="text/javascript" src="/static/js/user/teacher/score.js"></script>
 </head>
 <body onselectstart="return false;">
 	<div id="container">
 		<div id="nav"  onselectstart="return false;">
-			<a href="javascript:;" class="studentModifyInf navItem select">生成班级成绩表</a>
+			<a href="javascript:;" class="studentInf navItem select">成绩添加</a>
+			<a href="javascript:;" class="studentAccountManage navItem">成绩修改</a>
 		</div>
 		<div id="content">
-			<!-- 成绩表生成模块 -->
-			<div id="studentModifyInfCnt" class="navCntItem">
-				<div class="qResultHint hintBox hide">
-					<h3 class="hintText"></h3>
-				</div>
-				<label class="hint qCNameHint">
-					<select id="cName" class='hintSel hide'>
-						<option value="">请选择班级</option>
-					</select>
-					<select name="" id="cNameHint" class="hintSel">
-						<option value="">请选择班级</option>}
-					</select>
-					<a href="javascript:;" class="qCNameBtn hide hint1">确定</a>
-				</label>
-				<!-- 查询结果显示 -->
+			<!-- 学生信息模块 -->
+			<div id="studentInfCnt" class="navCntItem">
 				<div class="qResult">
 					<table class="rTable">
-						<thead>
-							<tr class="tableTile">
-								<th>班级编号</th>
-								<th>班级名称</th>
-								<th>课程编号</th>
-								<th>课程名称</th>
-								<th>操作</th>
-							</tr>
-						</thead>
-						<tbody class="tContent">
-							<!-- <tr class="tableContentItem">
-								<td>
-									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf" class="select">
-								</td>
-								<td>
-									<input type="text" name="" value="dfasdfsadfasfd">
-								</td>
-								<td>
-									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
-								</td>
-								<td>
-								<td class="handle">
-									<a href="javascript:;" class="modify">修改</a>
-									<a href="javascript:;" class="delete">删除</a>
-								</td>
-							</tr> -->
-						</tbody>
-					</table>
+							<thead>
+								<tr class="tableTile">
+									<th>教师编号</th>
+									<th>姓名</th>
+									<th>性别</th>
+									<th>出生日期</th>
+									<th>家庭住址</th>
+									<th>联系电话</th>
+									<th>电子邮箱</th>
+									<th>身份证码</th>
+									<th>院系</th>
+									<th>更多信息</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody class="tContent">
+								<!-- <tr class="tableContentItem">
+									<td>
+										<span>dfasdfa</span>
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td class="handle">
+										<a href="javascript:;" class="add">添加</a>
+									</td>
+								</tr> -->
+							</tbody>
+						</table>
+					</div>
+					<div class="qResultHint hintBox hide">
+						<h3 class="hintText"></h3>
+					</div>
+			</div>
+
+			<!-- 学生密码修改模块 -->
+			<div id="studentAccountManageCnt" class="navCntItem hide">
+				<h3 class="hint passOldHint">请输入密码:</h3>
+				<input type="password" name="" value="" class="hintInp sPass">
+				<h3 class="hint passNew1Hint">请输入新密码:</h3>
+				<input type="password" name="" value="" class="hintInp sNewPass1">
+				<h3 class="hint passNeweHint">请确认新密码:</h3>
+				<input type="password" name="" value="" class="hintInp sNewPass2">
+				<br>
+				<a href="javascript:;" class="mBtn hint1">确定</a>
+				<div class="qResultHint hintBox hide">
+					<h3 class="hintText"></h3>
 				</div>
 			</div>
 
 			<!-- 确认框框 -->
 			<div class="confirmbox hide">
-				<h2 class="confirmboxHint">是否确定生成成绩表？</h2>
+				<h2 class="confirmboxHint">是否确定？</h2>
 				<a href="javascript:;" class='cancelbox'>x</a>
 				<a href="javascript:;" class="confirm confirmboxItem">确定</a>
 				<a href="javascript:;" class="cancel confirmboxItem">取消</a>

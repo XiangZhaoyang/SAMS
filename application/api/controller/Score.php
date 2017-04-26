@@ -65,11 +65,11 @@ class Score extends Base
 		}
 	}
 
-	//添加一个班的成绩
-	public function addByClasses($courseid,$classesid)
+	//添加一个班的成绩表
+	public function addByClasses($courseid, $classesid)
 	{
 		if (!$this->userId) {
-			return json_return(null, '用户未登录，成绩信息添加失败', 0);
+			return json_return(null, '用户未登录，成绩表信息添加失败', 0);
 		}
 		$str = 'select student_id from student where student_classes_id = ?';
 		$student_id = Db::query($str, [$classesid]);
@@ -94,6 +94,17 @@ class Score extends Base
 			}
 		} else {
 			return json_return(null, '用户权限不够，成绩表添加失败', 0);
+		}
+	}
+
+	//添加一个班的成绩
+	public function addSoreByClasses()
+	{
+		if (!$this->userId) {
+			return json_return(null, '用户未登录，成绩信息添加失败', 0);
+		}
+		if ($this->userAuth == 2 && $this->userAuth == 1) {
+			$data = input('post.');
 		}
 	}
 

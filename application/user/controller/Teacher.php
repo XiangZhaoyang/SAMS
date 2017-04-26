@@ -112,7 +112,7 @@ class Teacher extends Controller
 		$this->isLogin();
 		$ulogin = ulogin();
 		$uid = $ulogin['userId'];
-		$str = 'select course.course_id,course.course_name, classes.classes_name as classes_name from course, classes where classes.classes_id = course.course_classes_id and course.course_classes_id =? and course.course_year = ? and course.course_term =? and course_teacher_id =?';
+		$str = 'select course.course_id,course.course_name, classes.classes_name as classes_name, classes.classes_id as classes_id from course, classes where classes.classes_id = course.course_classes_id and course.course_classes_id =? and course.course_year = ? and course.course_term =? and course_teacher_id =?';
 		$list = Db::query($str, [$cid, $year, $term, $uid]);
 		if ($list) {
 			return json_return($list, '信息查询成功', 1);
@@ -126,7 +126,7 @@ class Teacher extends Controller
 	{
 		$ulogin = ulogin();
 		$uid = $ulogin['userId'];
-		$str = 'select course.course_id,course.course_name, classes.classes_name as classes_name from course, classes where classes.classes_id = course.course_classes_id and course.course_year =? and course.course_term =? and course.course_teacher_id =?';
+		$str = 'select course.course_id,course.course_name, classes.classes_name as classes_name,classes.classes_id as classes_id from course, classes where classes.classes_id = course.course_classes_id and course.course_year =? and course.course_term =? and course.course_teacher_id =?';
 		$list = Db::query($str, [$year, $term, $uid]);
 		if ($list) {
 			return json_return($list, '信息查询成功', 1);
