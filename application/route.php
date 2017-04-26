@@ -19,6 +19,8 @@ return [
         'cid'  => '\d+',
         'pass' => '\w+',
         'newpass' => '\w+',
+        // 'year' => '\w+',
+        'term' => '\d+',
     ],
 
     '[api/user]'            => [
@@ -84,16 +86,18 @@ return [
         '/studentPassReset/:id' => ['user/admin/studentPasswordReset', ['method' => 'put']],
         '/teacherPassReset/:id' => ['user/admin/teacherPasswordReset', ['method' => 'put']],
         '/modifyPass/:pass/:newpass' => ['user/admin/modifyPass' , ['method' => 'put']],
-        '/passReset' => ['user/passReset' , ['method' => 'put']]
-        ],
-        '/classesCourse/:cid'   => ['user/admin/classesCourse', ['method' => 'get']],
+        '/passReset' => ['user/passReset' , ['method' => 'put']],
+         '/classesCourse/:cid'   =>   ['user/admin/classesCourse', ['method' => 'get']],
+    ],
 
     '[user/student]'            => [
-        '/reSetPass/:pass/:newpass' => ['user/student/reSetPass', ['method' => 'put']]
+        '/reSetPass/:pass/:newpass' => ['user/student/reSetPass', ['method' => 'put']],
     ],
 
     '[user/teacher]'            => [
         '/reSetPass/:pass/:newpass' => ['user/teacher/reSetPass', ['method' => 'put']],
+        '/courseIndexByCid/:cid/:year/:term' => ['user/teacher/courseIndexByClassesId', ['method' => 'get']],
+        '/courseIndex/:year/:term' => ['user/teacher/courseIndex', ['method' => 'get']]
     ],
 
     // '[user/index]'              => [

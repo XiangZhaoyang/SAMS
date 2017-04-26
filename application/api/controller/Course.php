@@ -35,7 +35,7 @@ class Course extends Base
 		} elseif ($this->userAuth == 3) {
 			$student = db('student', [], false)->where('student_id', $this->userId)->select();
 			$classes_id = $student[0]['student_classes_id'];
-			$list = CourseModel::all(['course_classes_id'] => $classes_id);
+			$list = CourseModel::all(['course_classes_id' => $classes_id]);
 			if ($list) {
 				return json_return($list, '课程列表信息查询成功', 1);
 			} else {

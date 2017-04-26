@@ -184,12 +184,12 @@ class Admin extends Controller
 	{
 		$this->isLogin();
 		$str = 'select * from classes where classes_id =?';
-		$classes = Db::query($str, $cid);
+		$classes = Db::query($str, [$cid]);
 		if (!$classes) {
 			return json_return(null, '不存在此班级，信息查询失败', 0);
 		}
-		$str = 'select classes.classes_id,classes.classes_name,course.course_id as classes_course_id,coursr_name as classes_course_name from classes,course where classes.classes_id = course_classes_id and course_add = 0 and classes =?';
-		$rt = Db::query($str, $cid);
+		$str = 'select classes.classes_id,classes.classes_name,course.course_id as classes_course_id,course.course_name as classes_course_name from classes,course where classes.classes_id = course.course_classes_id and course.course_add = 0 and classes.classes_id =?';
+		$rt = Db::query($str, [$cid]);
 		if ($rt) {
 			return json_return($rt, '信息查询成功', 1);
 		} else {

@@ -72,7 +72,7 @@ class Score extends Base
 			return json_return(null, '用户未登录，成绩信息添加失败', 0);
 		}
 		$str = 'select student_id from student where student_classes_id = ?';
-		$student_id = Db::query($str, $cid);
+		$student_id = Db::query($str, [$classesid]);
 		if (!$student_id) {
 			return json_return(null, '不存在此班级学生，成绩表添加失败', 0);
 		}
@@ -80,10 +80,15 @@ class Score extends Base
 		if ($this->userAuth == 1) {
 			$score = new ScoreModel;
 			foreach ($student_id as $key => $value) {
-				array_push($score, ['score_course_id' => $courseid, 'score_student_id' => $value]);
+				array_push($list, ['score_course_id' => $courseid, 'score_student_id' => $value['student_id']]);
 			}
 			if ($score->saveAll($list)) {
-				return json_return(true, '成绩表添加成功', 1);
+				$rt = Db::table('course')->where('course_id', $courseid)->update(['course_add' => '1']);
+				if ($rt) {
+					return json_return(true, '成绩表添加成功', 1);
+				} else {
+					return json_return(false, '成绩表添加出错', 0);
+				}
 			} else {
 				return json_return($score->getError(), '成绩表添加失败', 0);
 			}

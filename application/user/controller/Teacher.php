@@ -106,6 +106,35 @@ class Teacher extends Controller
 		return $this->fetch();
 	}
 
+	//根据班级查询课程列表
+	public function courseIndexByClassesId($cid, $year, $term)
+	{
+		$this->isLogin();
+		$ulogin = ulogin();
+		$uid = $ulogin['userId'];
+		$str = 'select course.course_id,course.course_name, classes.classes_name as classes_name from course, classes where classes.classes_id = course.course_classes_id and course.course_classes_id =? and course.course_year = ? and course.course_term =? and course_teacher_id =?';
+		$list = Db::query($str, [$cid, $year, $term, $uid]);
+		if ($list) {
+			return json_return($list, '信息查询成功', 1);
+		} else {
+			return json_return($list, '信息查询失败', 0);
+		}
+	}
+
+	//查询全部课程列表
+	public function courseIndex($year, $term)
+	{
+		$ulogin = ulogin();
+		$uid = $ulogin['userId'];
+		$str = 'select course.course_id,course.course_name, classes.classes_name as classes_name from course, classes where classes.classes_id = course.course_classes_id and course.course_year =? and course.course_term =? and course.course_teacher_id =?';
+		$list = Db::query($str, [$year, $term, $uid]);
+		if ($list) {
+			return json_return($list, '信息查询成功', 1);
+		} else {
+			return json_return($list, '信息查询失败', 0);
+		}
+	}
+
 	//teacher成绩管理
 	public function score()
 	{
