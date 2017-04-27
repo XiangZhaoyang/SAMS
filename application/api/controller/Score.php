@@ -104,7 +104,7 @@ class Score extends Base
 			return json_return(null, '用户未登录，成绩添加失败', 0);
 		}
 		if ($this->userAuth == 2 || $this->userAuth == 1) {
-			$str = 'select score.score_course_id,score.score_student_id ,student.student_name as student_name from score,student where score.score_student_id = student.student_id and score.score_course_id =? ';
+			$str = 'select score.score_course_id,score.score_student_id ,score.score_score,student.student_name as student_name from score,student where score.score_student_id = student.student_id and score.score_course_id =? ';
 			$list = Db::query($str, [$courseid]);
 			if ($list) {
 				return json_return($list, '成绩列表信息查询成功', 1);

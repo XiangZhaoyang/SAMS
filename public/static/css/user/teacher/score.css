@@ -124,7 +124,21 @@ body{
 .hint{
 	color: rgb(33,44,55);
 }
-
+.hint3{
+	display: inline-block;
+	height: 40px;
+	width: 15%;
+	line-height: 40px;
+	margin-left: 5%;
+	font-size: 20px;
+	border-radius: 10px;
+	text-align: center;
+	background-color: #F0A16C;
+	color: #F9F0EC;
+}
+.hint3:hover{
+	background-color: #EC7350;
+}
 .hint1{
 	display: inline-block;
 	height: 40px;
@@ -134,7 +148,7 @@ body{
 	border-radius: 10px;
 	text-align: center;
 	background-color: rgb(66,88,110);
-	color: rgb(12,22,25);
+	color: #F4F0F0;
 }
 .hint1:hover{
 	background-color: rgb(44,66,88);
@@ -308,4 +322,7 @@ body{
 }
 .rTable .tContent tr td .hintSel:hover{
 	background-color: #6E9695;
+}
+.hide{
+	display: none;
 }
