@@ -62,6 +62,7 @@ return [
         '/update/:sid/:cid'   => ['api/score/update', ['method' => 'put']],
         '/delete/:sid/:cid'    => ['api/score/delete', ['method' => 'delete']],
         'addByCid/:courseid/:classesid' => ['api/score/addByClasses', ['method' => 'post']],
+        '/indexScoreByCid/:courseid' => ['api/score/indexScoreByClassesId', ['method' => 'get']],
     ],
 
     '[api/student]'           => [

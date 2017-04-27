@@ -114,9 +114,9 @@ body{
 
 #content .navCntItem{
 	width: 98%;
-	height: 98%;
+	height: 90%;
 	position: relative;
-	margin: 10px auto 0;
+	margin: 5px auto 0;
 	min-width: 900px;
 	font-size: 16px;
 }
@@ -128,6 +128,7 @@ body{
 .hint1{
 	display: inline-block;
 	height: 40px;
+	width: 15%;
 	line-height: 40px;
 	font-size: 20px;
 	border-radius: 10px;
@@ -138,11 +139,21 @@ body{
 .hint1:hover{
 	background-color: rgb(44,66,88);
 }
+.hint1.hide{
+	display: none;
+}
 .hintInp{
 	color: #549D79;
 }
 .hintSel{
+	display: inline-block;
+	height: 40px;
+	margin-bottom: 10px;
 	color: #549D79;
+	border-radius: 4px;
+}
+.hintSel.hide{
+	display: none;
 }
 .hintBox {
 	position: fixed;
@@ -167,9 +178,9 @@ body{
 }
 
 .qResult{
-	width: 95%;
-	height: 90%;
-	margin: 0 auto;
+	width: 100%;
+	height: 98%;
+	margin: 0;
 	background-color: rgb(200,200,200);
 	overflow: auto;
 	border-radius: 6px;
@@ -191,20 +202,20 @@ body{
 	background-color: rgb(133,133,133);
 }
 .rTable .tableTile th{
-	width: 9%;
+	width: 10%;
 	border: 1px solid rgb(22,22,22);
 }
 .rTable .tableContentItem td{
 	border: 1px solid rgb(44,44,44);
 	padding: 0px;
+	background-color: rgb(230,230,230);
 }
 .rTable td{
 	height: 50px;
+	line-height: 50px;
 	padding: 0;
 	margin: 0;
-	overflow: hidden;
 	text-align: center;
-	background-color: #475A6F;
 }
 
 .rTable .tContent tr td input{
@@ -216,6 +227,9 @@ body{
 	background-color: rgb(230,230,230);
 }
 .rTable .tContent tr:hover td input,.rTable .tContent tr:nth-child(odd):hover td input{
+	background-color: #6E9695;
+}
+.rTable .tContent tr:hover td ,.rTable .tContent tr:nth-child(odd):hover td{
 	background-color: #6E9695;
 }
 .rTable .tContent tr td input.select{
@@ -232,7 +246,6 @@ body{
 	width: 100%;
 	line-height: 50px;
 	color: rgb(255,255,255);
-	overflow: auto;
 	background-color: #475A6F;
 }
 .rTable .tContent tr td.handle a{
@@ -295,23 +308,4 @@ body{
 }
 .rTable .tContent tr td .hintSel:hover{
 	background-color: #6E9695;
-}
-.passOldHint{
-	color: #F5B047;
-}
-.passNew1Hint{
-	color: #F15C68;
-}
-.passNeweHint{
-	color: #F91010;
-}
-.mBtn{
-	display: inline-block;
-	width: 10%;
-	height: 30px;
-	line-height: 30px;
-	margin-top: 20px;
-	text-align: center;
-	color: #FD8B54;
-	/*background-color: #E3AA70;*/
 }

@@ -44,254 +44,128 @@ $(function(){
 });
 
 
-//学生个人信息模块
+
+//课程查询模块
 $(function(){
-	var $studentInfNd = $('#nav .studentInf'),
+	var $cNameNd =  $('#studentInfCnt #cName'),
+		$cNameHintNd = $('#studentInfCnt #cNameHint'),
+		$qCNameBtnNd = $('#studentInfCnt .qCNameBtn'),
 		$qResultHintNd = $('#studentInfCnt .qResultHint'),
 		$hintTextNd = $('#studentInfCnt .hintText'),
-		$tContentNd = $('#studentInfCnt .tContent'),
-		$confirmboxNd = $('.confirmbox'),
-		$confirmboxHintNd = $('.confirmbox .confirmboxHint'),
-		$cancelboxNd = $('.confirmbox .cancelbox'),
-		$confirmNd = $('.confirmbox .confirm'),
-		$cancelNd = $('.confirmbox .confirmboxItem');
+		$tContentNd = $('#studentInfCnt .tContent');
 
-	//内容对象数组
-	var qOA = [];
-
-	$studentInfNd.on('click', function(event) {
+	//选择班级
+	$cNameHintNd.on('click', function(event) {
 		event.preventDefault();
-		var $req = infQuery()
-				.done(function(data) {
+		$cNameHintNd.addClass('hide');
+		$cNameNd.removeClass('hide').addClass('showInline');
+		var str = '';
+		var $req = courseIndex()
+			.done(function(data) {
+				if (data.code == 1) {
+					var data = data.data;
+					data.forEach(function(item) {
+						str += '<option value="' + item['classes_id'] + '">' + item['classes_name'] + '</option>'
+					});
+					$qCNameBtnNd.removeClass('hide').addClass('showInline');
+				}
+				$cNameNd[0].innerHTML = str;
+			})
+			.fail(function(){
+				showHintBox($qResultHintNd);
+				showHint($hintTextNd);
+			});
+	});
+
+	//根据班级查询课程
+	$qCNameBtnNd.on('click', function(event) {
+		event.preventDefault();
+		var cid = $cNameNd.val();
+		console.log(cid);
+		//
+		var $req = courseIndexByCid(cid)
+			.done(function(data) {
+				if (data.code == 1 && data.data) {
+					console.log('success');
+				} else {
+					showHintBox($qResultHintNd);
 					showHint($hintTextNd, data.message);
-					if (data.code == 1) {
-						if (data.data) {
-							var dataR = []
-							dataR.push(data.data);
-							showRt(dataR);
-						}
+					$tContentNd[0].innerHTML = '';
+				}
+				console.log(data.data);
+			})
+			.fail(function() {
+				showHintBox($qResultHintNd);
+				showHint($hintTextNd);
+			});
+
+		$req.done(function(data) {
+			var courseId = data.data['course_id'];
+			var dataClasses = data.data;
+			var $req2 = indexScoreByCid(courseId)
+				.done(function(data) {
+					if (data.code == 1 && data.data) {
+						showRt(data.data, dataClasses);
+					} else {
+						showHintBox($qResultHintNd);
+						showHint($hintTextNd, data.message);
+						$tContentNd[0].innerHTML = '';
 					}
 				})
-				.fail(function(err){
-					showHint($hintTextNd, '网络连接失败，请稍后再试');
-				})
-				.always(function(data) {
+				.fail(function() {
 					showHintBox($qResultHintNd);
+					showHint($hintTextNd);
 				});
+		});
 	});
 
-	//修改学生信息（点击事件代理）
-	$tContentNd.on('click', function(event) {
-		event.preventDefault();
-		var that = event.target;
+	//学生成绩列表对象
+	var scoreObj = [];
 
-		//判断是否是修改按钮
-		if (that.classList.contains('modify')) {
-			//得到行索引
-			var index = that.getAttribute('item')
-			//判断内容是否改变
-			console.log(qOA[index]);
-			if(!qOA[index].change) {
-				showHintBox($qResultHintNd);
-				console.log($qResultHintNd[0]);
-				showHint($hintTextNd,'内容并没改变,信息修改失败');
-				return;
-			}
 
-			$confirmboxNd.removeClass('hide');
-			$confirmboxHintNd[0].innerText = '确定要修改吗';
+	//显示课程数据
+	function showRt(data,dataClasses) {
+		var str = '';
+		cId = dataClasses['course_id'],
+		cName =  dataClasses['course_name'],
+		cCourseId   = dataClasses['classes_id'],
+		cCourseName  = dataClasses['classes_name'];
+		data.forEach(function(item, index) {
+			var data = item,
+			str += '<tr class="tableContentItem"><td class="course_id" item=" ' + index + ' ">' + cCourseId  +'</td>' +
+			'<td class="course_name" item="' + index + '">' + cName + '</td>' + 
+			'<td class="classes_course_id" item="' + index +'">' + cId + '</td>' + 
+			'<td class="classes_course_name" item="' + index + '">' + cCourseName + '</td>'+
+			'<td class="score_student_id" item>' + + '</td></tr>';
+		});
+		$tContentNd[0].innerHTML = str;
+	}
 
-			//绑定确认框的确认按钮事件
-			$confirmNd.on('click', function(event) {
-				event.preventDefault();
-				$confirmboxNd.addClass('hide');
-				var sid = qOA[index].data['teacher_id'],
-					data = qOA[index].data;
-				var $req = modifySI(sid,data,index)
-					.done(function(data){
-						showHint($hintTextNd,data.message);
-						if (data.code == 1) {
-							qOA[index].change = false;;
-						}
-					})
-					.fail(function(err) {
-						showHint($hintTextNd, '网络连接失败，请稍后再试');
-					})
-					.always(function(){
-						showHintBox($qResultHintNd);
-					});
-			});
-		}
-
-		that.classList.add('select');
-	});
-
-	//光标离开时的样式
-	$tContentNd.on('focusout',function(event) {
-		event.preventDefault();
-		var that = event.target;
-		that.classList.remove('select');
-	});
-
-	//确认框取消
-	$cancelboxNd.on('click', function(event) {
-		event.preventDefault();
-		$confirmboxNd.addClass('hide');
-	});
-
-	//确认框取消
-	$cancelNd.on('click', function(event) {
-		event.preventDefault();
-		$confirmboxNd.addClass('hide');
-	});
-
-	//监听单元格的内容改变
-	$tContentNd.on('change', function(event) {
-		event.preventDefault();
-		var that = event.target;
-		//如果内容改变
-		var index = that.getAttribute('item');
-		console.log(qOA);
-		qOA[index].change = true;
-		qOA[index]['data'][that.classList[0]] = that.value;
-	});
-
-	//教师基本信息查询
-	function infQuery(url) {
-		url = url || '/user/teacher/infQuery';
+	//根据班级id查询信息
+	function courseIndexByCid(cid,year,term) {
+		year = year || '2015-2016';
+		term = term || '1';
+		var url = '/user/teacher/courseIndexByCid/' + cid + '\/' + year + '\/' + term;
 		var $req = $.ajax({
 			url: url,
 			type: 'GET',
 			dataType: 'json',
 			data: '',
 		})
-		.done(function(data) {
-			console.log("success");
+		.done(function() {
+			console.log(url);
 		});
 		return $req;
 	}
 
-	//教师基本信息显示
-	function showRt(qRData){
-		var rstr = '';
-		qOA = [];
-		qRData.forEach(function(item,index){
-			var data = item,
-				qO = {},
-				qData = qO.data = {},
-				sId = qData['teacher_id'] = data['teacher_id'],
-				sName = qData['teacher_name'] = data['teacher_name'],
-				sSex = (data['teacher_sex'] == 1) ? '男' : '女',
-				sBir = qData['teacher_brith'] =data['teacher_brith'],
-				sAdress = qData['teacher_address'] = data['teacher_address'],
-				sPhone = qData['teacher_phoneNum'] = data['teacher_phoneNum'],
-				sEmail = qData['teacher_email'] =data['teacher_email'],
-				sIdCard = qData['teacher_idcard'] = data['teacher_idcard'],
-				sClasses = qData['teacher_department_id'] = data['teacher_department_id'],
-				sClassesName = data['teacher_department_name'],
-				sInf = qData['teacher_information'] = data['teacher_information'];
-			qData['teacher_sex'] = data['teacher_sex'];
-			qO.change = false;
-			console.log(qRData);
-			rstr += '<tr class="tableContentItem"><td><span class="teacher_id">' + sId +
-				'</span></td><td><span class="teacher_name" item="' + index + 
-				'" name="">'+ sName +
-				'</span></td><td><span class="student_sex" item="' + index + 
-				'">' + sSex + '</span></td>'+
-				'<td><input class="teacher_brith" item="' + index + 
-				'" type="text" name="" value="'+ sBir +
-				'"></td><td><input class="teacher_address" item="' + index +
-				'" type="text" name="" value="'+ sAdress + 
-				'"></td><td><input class="teacher_phoneNum" item="' + index +
-				'" type="text" name="" value="' + sPhone + 
-				'"></td><td><input class="teacher_email" item="' + index + 
-				'" type="text" name="" value="' + sEmail + 
-				'"></td><td><input class="teacher_idcard" item="' + index + 
-				'" type="text" name="" value="' + sIdCard + 
-				'"></td><td> <span class="teacher_departemnt_name" item="' + index + 
-				'">' + sClassesName + '</span>' +
-				'</td>' + '<td><input class="teacher_information" item="' + index + 
-				'" type="text" name="" value="' + sInf +  '"></td>' +
-				'<td class="handle"><a href="javascript:;" class="modify" item="' + index +
-				'">修改</a></td></tr>';
-			$tContentNd[0].innerHTML = rstr;
-			qOA[index] = qO;
-		});
-	}
-
-	//教师基本信息修改
-	function modifySI(sid, data, index) {
-		var url = '/api/teacher/update/' + sid;
-		var $req =$.ajax({
-			url: url,
-			type: 'PUT',
-			dataType: 'json',
-			data: data,
-		})
-		.done(function(data) {
-			console.log('success');
-		});
-		return $req;
-	}
-});
-
-
-
-//教师密码修改模块
-$(function() {
-	var $sPassNd = $('#studentAccountManageCnt .sPass'),
-		$sNewPass1Nd = $('#studentAccountManageCnt .sNewPass1'),
-		$sNewPass2Nd = $('#studentAccountManageCnt .sNewPass2'),
-		$mBtnNd = $('#studentAccountManageCnt .mBtn'),
-		$qResultHintNd = $('#studentAccountManageCnt .qResultHint'),
-		$hintTextNd = $('#studentAccountManageCnt .hintText');
-
-	$mBtnNd.on('click', function(event) {
-		event.preventDefault();
-		showHintBox($qResultHintNd);
-		if ($sPassNd.val().length == 0) {
-			showHint($hintTextNd, '请输入密码');
-			return;
-		} else if ($sPassNd.val().length < 6) {
-			showHint($hintTextNd, '请输入至少不少于6位的密码');
-			return;
-		}
-		if ($sNewPass1Nd.val().length == 0) {
-			showHint($hintTextNd, '请输入新密码');
-			return;
-		} else if ($sNewPass1Nd.val().length < 6) {
-			showHint($hintTextNd, '新密码的长度不能低于6位');
-			return;
-		}
-		if ($sNewPass2Nd.val().length == 0) {
-			showHint($hintTextNd, '确认密码不能为空');
-			return;
-		} else if ($sNewPass1Nd.val() != $sNewPass2Nd.val()) {
-			showHint($hintTextNd, '修改密码两次不一致');
-			return;
-		}
-		if ($sNewPass1Nd.val() == $sPassNd.val()) {
-			showHint($hintTextNd, '新密码和旧密码相同');
-			return;
-		}
-		var $req = reSetPass($sPassNd.val(), $sNewPass1Nd.val())
-			.done(function(data) {
-				showHint($hintTextNd, data.message);
-				if (data.code == 1) {
-					location.reload();
-				}
-			})
-			.fail(function(err) {
-				showHint($hintTextNd, '网络连接失败，请稍后再试');
-			});
-	});
-
-	//教师密码修改
-	function reSetPass(oldpass, newpass) {
-		var url = '/user/teacher/reSetPass/' + oldpass + '\/' + newpass;
+	//查询教师全部课程列表
+	function courseIndex(year, term) {
+		year = year || '2015-2016';
+		term = term || '1';
+		var url = '/user/teacher/courseIndex/' + year + '\/' + term + '\/';
 		var $req = $.ajax({
 			url: url,
-			type: 'PUT',
+			type: 'GET',
 			dataType: 'json',
 			data: '',
 		})
@@ -300,5 +174,20 @@ $(function() {
 		});
 		return $req;
 	}
-});
 
+	//根据课程查询学生成绩列表
+	function indexScoreByCid(courseId) {
+		var url = '/api/score/indexScoreByCid/' + courseId;
+		var $req = $.ajax({
+			url: url,
+			type: 'GET',
+			dataType: 'json',
+			data: '',
+		})
+		.done(function() {
+			console.log("success");
+		});
+		return $req;
+	}
+
+});

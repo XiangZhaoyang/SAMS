@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-04-27 15:34:06
+-- Generation Time: 2017-04-27 15:38:30
 -- 服务器版本： 10.1.21-MariaDB
 -- PHP Version: 7.0.15
 
@@ -19,11 +19,15 @@ SET time_zone = "+00:00";
 --
 -- Database: `studentams`
 --
+CREATE DATABASE IF NOT EXISTS `studentams` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `studentams`;
 
 -- --------------------------------------------------------
 
 --
 -- 表的结构 `classes`
+--
+-- 创建时间： 2017-04-19 01:26:42
 --
 
 CREATE TABLE `classes` (
@@ -33,6 +37,12 @@ CREATE TABLE `classes` (
   `classes_majorName` varchar(20) NOT NULL,
   `classes_information` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 表的关联 `classes`:
+--   `classes_department_id`
+--       `department` -> `department_id`
+--
 
 --
 -- 转存表中的数据 `classes`
@@ -53,6 +63,8 @@ INSERT INTO `classes` (`classes_id`, `classes_name`, `classes_department_id`, `c
 --
 -- 表的结构 `course`
 --
+-- 创建时间： 2017-04-26 01:08:09
+--
 
 CREATE TABLE `course` (
   `course_id` int(8) UNSIGNED NOT NULL,
@@ -70,6 +82,16 @@ CREATE TABLE `course` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- 表的关联 `course`:
+--   `course_teacher_id`
+--       `teacher` -> `teacher_id`
+--   `course_classes_id`
+--       `classes` -> `classes_id`
+--   `course_department_id`
+--       `department` -> `department_id`
+--
+
+--
 -- 转存表中的数据 `course`
 --
 
@@ -85,12 +107,18 @@ INSERT INTO `course` (`course_id`, `course_teacher_id`, `course_classes_id`, `co
 --
 -- 表的结构 `department`
 --
+-- 创建时间： 2017-04-19 01:26:42
+--
 
 CREATE TABLE `department` (
   `department_id` int(8) UNSIGNED NOT NULL,
   `department_name` varchar(15) NOT NULL,
   `department_information` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 表的关联 `department`:
+--
 
 --
 -- 转存表中的数据 `department`
@@ -105,6 +133,8 @@ INSERT INTO `department` (`department_id`, `department_name`, `department_inform
 --
 -- 表的结构 `score`
 --
+-- 创建时间： 2017-04-19 01:26:42
+--
 
 CREATE TABLE `score` (
   `score_course_id` int(8) UNSIGNED NOT NULL,
@@ -115,6 +145,14 @@ CREATE TABLE `score` (
   `score_second` float(3,2) DEFAULT NULL,
   `score_information` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 表的关联 `score`:
+--   `score_course_id`
+--       `course` -> `course_id`
+--   `score_student_id`
+--       `student` -> `student_id`
+--
 
 --
 -- 转存表中的数据 `score`
@@ -131,6 +169,8 @@ INSERT INTO `score` (`score_course_id`, `score_student_id`, `score_score`, `scor
 --
 -- 表的结构 `student`
 --
+-- 创建时间： 2017-04-19 01:26:42
+--
 
 CREATE TABLE `student` (
   `student_id` bigint(12) UNSIGNED NOT NULL,
@@ -145,6 +185,14 @@ CREATE TABLE `student` (
   `student_email` varchar(30) DEFAULT NULL,
   `student_idcard` bigint(18) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 表的关联 `student`:
+--   `student_id`
+--       `user` -> `user_id`
+--   `student_classes_id`
+--       `classes` -> `classes_id`
+--
 
 --
 -- 转存表中的数据 `student`
@@ -170,6 +218,8 @@ INSERT INTO `student` (`student_id`, `student_classes_id`, `student_sex`, `stude
 --
 -- 表的结构 `teacher`
 --
+-- 创建时间： 2017-04-19 01:26:42
+--
 
 CREATE TABLE `teacher` (
   `teacher_id` bigint(12) UNSIGNED NOT NULL,
@@ -184,6 +234,14 @@ CREATE TABLE `teacher` (
   `teacher_email` varchar(30) DEFAULT NULL,
   `teacher_idvard` bigint(18) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 表的关联 `teacher`:
+--   `teacher_id`
+--       `user` -> `user_id`
+--   `teacher_department_id`
+--       `department` -> `department_id`
+--
 
 --
 -- 转存表中的数据 `teacher`
@@ -212,6 +270,8 @@ INSERT INTO `teacher` (`teacher_id`, `teacher_department_id`, `teacher_name`, `t
 --
 -- 表的结构 `user`
 --
+-- 创建时间： 2017-04-19 01:26:42
+--
 
 CREATE TABLE `user` (
   `user_id` bigint(12) UNSIGNED NOT NULL,
@@ -219,6 +279,10 @@ CREATE TABLE `user` (
   `user_createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_auth` tinyint(1) NOT NULL DEFAULT '3'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 表的关联 `user`:
+--
 
 --
 -- 转存表中的数据 `user`

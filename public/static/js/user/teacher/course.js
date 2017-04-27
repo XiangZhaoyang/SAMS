@@ -29,7 +29,7 @@ $(function(){
 		$cNameHintNd.addClass('hide');
 		$cNameNd.removeClass('hide').addClass('showInline');
 		var str = '';
-		var $req = cQuery()
+		var $req = courseIndex()
 			.done(function(data) {
 				if (data.code == 1) {
 					var data = data.data;
@@ -109,8 +109,8 @@ $(function(){
 
 	//根据班级id查询信息
 	function courseIndexByCid(cid,year,term) {
-		year = year || '2013-2014';
-		term = term || '2';
+		year = year || '2015-2016';
+		term = term || '1';
 		var url = '/user/teacher/courseIndexByCid/' + cid + '\/' + year + '\/' + term;
 		var $req = $.ajax({
 			url: url,
@@ -126,8 +126,8 @@ $(function(){
 	
 	//查询教师全部课程列表
 	function courseIndex(year, term) {
-		year = year || '2013-2014';
-		term = term || '2';
+		year = year || '2015-2016';
+		term = term || '1';
 		var url = '/user/teacher/courseIndex/' + year + '\/' + term + '\/';
 		var $req = $.ajax({
 			url: url,
@@ -137,21 +137,6 @@ $(function(){
 		})
 		.done(function() {
 			console.log("success");
-		});
-		return $req;
-	}
-
-	//班级查询
-	function cQuery(url) {
-		url = url || '/api/classes/index';
-		var $req = $.ajax({
-			url: url,
-			type: 'GET',
-			dataType: 'json',
-			data: '',
-		})
-		.done(function() {
-			console.log('success');
 		});
 		return $req;
 	}
