@@ -84,17 +84,33 @@
 
 			<!-- 成绩修改模块 -->
 			<div id="studentAccountManageCnt" class="navCntItem hide">
+				<a href="javascript:;" class="qId hint2">根据学生id修改</a>
+				<a href="javascript:;" class="qClasses hint2">根据班级修改</a>
+				<label class="hint hide qIdHint">请输入学生id:
+					<input type="text" name="" value="" id="sId" class="hintInp">
+					<a href="javascript:;" class="qIdBtn hint1">确定</a>
+				</label>
+				<label class="hint hide qCNameHint">请选择班级：
+					<select id="cName" class='hintSel'>
+					<!-- <option value=""></option> -->
+					</select>
+					<a href="javascript:;" class="qCNameBtn hint1">确定</a>
+				</label>
+				<div class="qResultHint hintBox hide">
+					<h3 class="hintText"></h3>
+				</div>
 				<div class="qResult">
 					<table class="rTable">
 							<thead>
 								<tr class="tableTile">
 									<th>课程编号</th>
 									<th>课程名称</th>
-									<th>班级编号</th>
+									<!-- <th>班级编号</th> -->
 									<th>班级名称</th>
 									<th>学生学号</th>
 									<th>学生姓名</th>
 									<th>学生成绩</th>
+									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody class="tContent">

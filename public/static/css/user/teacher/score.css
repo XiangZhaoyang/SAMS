@@ -326,3 +326,17 @@ body{
 .hide{
 	display: none;
 }
+
+.hint2{
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	font-size: 20px;
+	border-radius: 10px;
+	text-align: center;
+	background-color: rgb(66,88,110);
+	color: rgb(12,22,25);
+}
+.hint2:hover{
+	background-color: rgb(44,66,88);
+}

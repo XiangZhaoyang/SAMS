@@ -61,8 +61,10 @@ return [
         '/add'          => ['api/score/add', ['method' => 'post']],
         '/update/:sid/:cid'   => ['api/score/update', ['method' => 'put']],
         '/delete/:sid/:cid'    => ['api/score/delete', ['method' => 'delete']],
-        'addByCid/:courseid/:classesid' => ['api/score/addByClasses', ['method' => 'post']],
-        '/indexScoreByCid/:courseid' => ['api/score/indexScoreByClassesId', ['method' => 'get']],
+        '/addByCid/:courseid/:classesid' => ['api/score/addByClasses', ['method' => 'post']],
+        '/indexScoreByCid/:courseid' => ['api/score/indexScoreByClassesIdNoAdd', ['method' => 'get']],
+        '/addSoreByClasses/:courseid' => ['api/score/addSoreByClasses', ['method' => 'put']],
+        'indexScoreByCidAdd/:courseid' => ['api/score/indexScoreByClassesIdAdd', ['method' => 'get']],
     ],
 
     '[api/student]'           => [

@@ -83,7 +83,7 @@ class Score extends Base
 				array_push($list, ['score_course_id' => $courseid, 'score_student_id' => $value['student_id']]);
 			}
 			if ($score->saveAll($list)) {
-				$rt = Db::table('course')->where('course_id', $courseid)->update(['course_add' => '1']);
+				$rt = db('course')->where('course_id', $courseid)->update(['course_add' => '1']);
 				if ($rt) {
 					return json_return(true, '成绩表添加成功', 1);
 				} else {
@@ -97,14 +97,28 @@ class Score extends Base
 		}
 	}
 
-	//查询一个班的成绩
-	public function indexScoreByClassesId($courseid)
+	//查询一个班的成绩（未添加成绩）
+	public function indexScoreByClassesIdNoAdd($courseid)
 	{
 		if (!$this->userId) {
 			return json_return(null, '用户未登录，成绩添加失败', 0);
 		}
 		if ($this->userAuth == 2 || $this->userAuth == 1) {
-			$str = 'select score.score_course_id,score.score_student_id ,score.score_score,student.student_name as student_name from score,student where score.score_student_id = student.student_id and score.score_course_id =? ';
+			$str = 'select score.score_id, score.score_course_id,score.score_student_id ,score.score_score,student.student_name as student_name from score,student where score.score_student_id = student.student_id and score.score_add = 0 and score.score_course_id =? ';
+			$list = Db::query($str, [$courseid]);
+			if ($list) {
+				return json_return($list, '成绩列表信息查询成功', 1);
+			} else {
+				return json_return(null, '成绩列表信息查询失败', 0);
+			}
+		}
+	}
+
+	//查询一个班的成绩（已添加成绩）
+	public function indexScoreByClassesIdAdd($courseid)
+	{
+		if ($this->userAuth == 2 || $this->userAuth == 1) {
+			$str = 'select score.score_id, score.score_course_id,score.score_student_id ,score.score_score,student.student_name as student_name from score,student where score.score_student_id = student.student_id and score.score_add = 1 and score.score_course_id =? ';
 			$list = Db::query($str, [$courseid]);
 			if ($list) {
 				return json_return($list, '成绩列表信息查询成功', 1);
@@ -115,17 +129,48 @@ class Score extends Base
 	}
 
 	//添加一个班的成绩
-	public function addSoreByClasses()
+	public function addSoreByClasses($courseid)
 	{
 		if (!$this->userId) {
 			return json_return(null, '用户未登录，成绩信息添加失败', 0);
 		}
 		if ($this->userAuth == 2 || $this->userAuth == 1) {
-			$data = input('post.');
+			$courseid = input('param.courseid');
+
+			$str = 'select course_credit from course where course_id =?';
+
+			$credit = Db::query($str, [$courseid]);
+			$credit = $credit[0]['course_credit'];
+			$data = input('put.');
+			$list = [];
+			foreach ($data as $key => $value) {
+				$listItem = [];
+				$score = floatval($value['score_score']);
+				if ($score >= 60) {
+					$listItem['score_pass'] = 1;
+				} else {
+					$listItem['score_pass'] = 0;
+				}
+				$listItem['score_gpa'] = number_format( ($credit / $score), 1);
+				$listItem['score_score'] = $score;
+				$listItem['score_course_id'] = $value['score_course_id'];
+				$listItem['score_student_id'] = $value['score_student_id'];
+				$listItem['score_id'] = $value['score_id'];
+				array_push($list, $listItem);
+			}
+			$score = new ScoreModel;
+			$rt = $score->saveAll($list,true);
+			if ($rt) {
+				return json_return($rt, '班级成绩信息添加成功', 0);
+			} else {
+				return json_return(null, '班级成信息添加失败', 1);
+			}
+		} else {
+			return json_return(null, '用户权限不够，成绩信息添加失败', 0);
 		}
 	}
 
-	// 根据主键修改
+	// 根据学生学号和课程编号修改
 	public function update($sid, $cid)
 	{
 		if (!$this->userId) {
