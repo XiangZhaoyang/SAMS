@@ -151,11 +151,16 @@ class Score extends Base
 				} else {
 					$listItem['score_pass'] = 0;
 				}
-				$listItem['score_gpa'] = number_format( ($credit / $score), 1);
+				if ($score >= 50) {
+					$listItem['score_gpa'] = number_format((($score - 50) / 10), 1);
+				} else {
+					$listItem['score_gpa'] = number_format(0, 1);
+				}
 				$listItem['score_score'] = $score;
 				$listItem['score_course_id'] = $value['score_course_id'];
 				$listItem['score_student_id'] = $value['score_student_id'];
 				$listItem['score_id'] = $value['score_id'];
+				$listItem['score_add'] = 1;
 				array_push($list, $listItem);
 			}
 			$score = new ScoreModel;
@@ -176,18 +181,31 @@ class Score extends Base
 		if (!$this->userId) {
 			return json_return(null, '用户未登录，成绩信息更新失败', 0);
 		}
-		if ($this->userAuth == 1) {
-			$score = ScoreModel::get(['score_course_id' => $cid, 'score_student_id' => $sid]);
-			if (!$score) {
+		if ($this->userAuth == 1 || $this->userAuth == 2) {
+			$scoreModel = ScoreModel::get(['score_course_id' => $cid, 'score_student_id' => $sid]);
+			if (!$scoreModel) {
 				return json_return(null, '不存在此成绩信息，成绩信息修改失败', 0);
 			}
-			if ($score->allowField(true)->save(input('put.'))) {
-				return json_return([$score->score_course_id, $score->score_student_id], '成绩信息修改成功', 1);
+			$data = input('put.');
+			$score = floatval($data['score_score']);
+			if ($score >= 60) {
+				$data['score_pass'] = 1;
 			} else {
-				json_return(null, '成绩信息修改失败', 0);
+				$data['score_pass'] = 0;
+			}
+			if ($score >= 50) {
+				$data['score_gpa'] = number_format((($score - 50) / 10), 1);
+			} else {
+				$data['score_gpa'] = number_format(0, 1);
+			}
+			// return json_return($data);
+			if ($scoreModel->allowField(true)->save($data)) {
+				return json_return([$scoreModel->score_course_id, $scoreModel->score_student_id], '成绩信息修改成功', 1);
+			} else {
+				return json_return(null, '成绩信息修改失败', 0);
 			}
 		} else {
-			json_return(null, '用户权限不够，成绩信息添加失败', 0);
+			return json_return(null, '用户权限不够，成绩信息添加失败', 0);
 		}
 	}
 

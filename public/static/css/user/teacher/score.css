@@ -336,6 +336,7 @@ body{
 	text-align: center;
 	background-color: rgb(66,88,110);
 	color: rgb(12,22,25);
+	margin-bottom: 10px;
 }
 .hint2:hover{
 	background-color: rgb(44,66,88);
