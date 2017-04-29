@@ -114,9 +114,9 @@ body{
 
 #content .navCntItem{
 	width: 98%;
-	height: 98%;
+	height: 90%;
 	position: relative;
-	margin: 0 auto;
+	margin: 5px auto 0;
 	min-width: 900px;
 	font-size: 16px;
 }
@@ -128,6 +128,7 @@ body{
 .hint1{
 	display: inline-block;
 	height: 40px;
+	width: 15%;
 	line-height: 40px;
 	font-size: 20px;
 	border-radius: 10px;
@@ -138,11 +139,21 @@ body{
 .hint1:hover{
 	background-color: rgb(44,66,88);
 }
+.hint1.hide{
+	display: none;
+}
 .hintInp{
 	color: #549D79;
 }
 .hintSel{
+	display: inline-block;
+	height: 40px;
+	margin-bottom: 10px;
 	color: #549D79;
+	border-radius: 4px;
+}
+.hintSel.hide{
+	display: none;
 }
 .hintBox {
 	position: fixed;
@@ -168,8 +179,8 @@ body{
 
 .qResult{
 	width: 100%;
-	height: 80%;
-	margin: 2% 0 0;
+	height: 98%;
+	margin: 0;
 	background-color: rgb(200,200,200);
 	overflow: auto;
 	border-radius: 6px;
@@ -196,7 +207,6 @@ body{
 }
 .rTable .tableContentItem td{
 	border: 1px solid rgb(44,44,44);
-	padding: 0px;
 }
 .rTable td{
 	height: 50px;
@@ -206,91 +216,11 @@ body{
 	text-align: center;
 }
 
-.rTable .tContent tr td input{
-	height: 100%;
-	width: 100%;
-	border: none;
-	text-align: center;
-	color: rgb(22,22,22);
-	background-color: rgb(230,230,230);
-}
-.rTable .tContent tr:hover td input,.rTable .tContent tr:nth-child(odd):hover td input{
+.rTable .tContent tr:hover td ,.rTable .tContent tr:nth-child(odd):hover td {
 	background-color: #6E9695;
-}
-.rTable .tContent tr td input.select{
-	color: rgb(255,255,225);
-	background-color: #6F897A;
-}
-.rTable .tContent tr td.handle{
-	min-width: 100px;
-	background-color: #697F96;
-}
-.rTable .tContent tr td span{
-	display: inline-block;
-	height: 50px;
-	width: 100%;
-	line-height: 50px;
-	color: rgb(255,255,255);
-	background-color: #475A6F;
-}
-.rTable .tContent tr td.handle a{
-	display: inline-block;
-	width: 40%;
-	height: 40px;
-	margin-top: 5px;
-	line-height: 40px;
-	border-radius: 4px;
-	font-weight: bold;
-	color: rgb(255,255,255);
-}
-.rTable .tContent tr td.handle a.modify{
-	background-color: #F0B236;
-}
-.rTable .tContent tr td.handle a.modify:hover{
-	background-color: #FE7C49;
-}
-.rTable .tContent tr td.handle a.delete{
-	background-color: #F57981;
-}
-.rTable .tContent tr td.handle a.delete:hover{
-	background-color: #FA2B2F;
-}
-.rTable .tContent tr:nth-child(odd) td input{
-	background-color: #A2BAA8;
-}
-.rTable .tContent tr:nth-child(odd) td input.select{
-	color: rgb(255,255,225);
-	background-color: #6F897A;
 }
 
-/*添加信息模块*/
-.rTable .tContent tr td.handle a.add{
-	background-color: #F0B236;
-}
-.rTable .tContent tr td.handle a.add:hover{
-	background-color: #FE7C49;
-}
-.rTable .tContent tr td .hintSel{
-	display: inline-block;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-	border: none;
-	color: rgb(25,25,25);
-	background-color: rgb(230,230,230);
-}
-.rTable .tContent tr td .hintSel option{
-	display: inline-block;
-	color: #405061;
-	text-align: center;
-}
-.rTable .tContent tr:nth-child(odd) td .hintSel{
-	background-color: #A2BAA8;
-}
-.rTable .tContent tr td .hintSel.select{
-	color: rgb(255,255,225);
-	background-color: #6F897A;
-}
-.rTable .tContent tr td .hintSel:hover{
-	background-color: #6E9695;
+.rTable .tContent tr:nth-child(odd) td{
+	color: #FBEDE6;
+	background-color: #79877D;
 }

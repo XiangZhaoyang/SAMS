@@ -63,13 +63,14 @@ $(function(){
 		event.preventDefault();
 		var $req = infQuery()
 				.done(function(data) {
-					showHint($hintTextNd, data.message);
 					if (data.code == 1) {
 						if (data.data) {
 							var dataR = []
 							dataR.push(data.data);
 							showRt(dataR);
 						}
+					} else{
+						showHint($hintTextNd, data.message);
 					}
 				})
 				.fail(function(err){

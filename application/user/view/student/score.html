@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>学生成绩管理</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+	<link rel="stylesheet" href="/static/css/user/student/score.css">
+	<script type="text/javascript" src="/static/js/jquery.js"></script>
+	<script type="text/javascript" src="/static/js/user/student/score.js"></script>
+</head>
+<body onselectstart="return false;">
+	<div id="container">
+		<div id="nav"  onselectstart="return false;">
+			<a href="javascript:;" class="studentInf navItem select">成绩查询</a>
+			<a href="javascript:;" class="studentAccountManage navItem">成绩分析</a>
+		</div>
+		<div id="content">
+
+			<!-- 成绩添加模块 -->
+			<div id="studentInfCnt" class="navCntItem">
+				<label class="hint qCNameHint">
+					<select id="cName" class='hintSel hide'>
+						<!-- <option value="">请选择班级</option> -->
+					</select>
+					<select name="" id="cNameHint" class="hintSel">
+						<option value="">请选择学年</option>}
+					</select>
+					<select name="" id="term" class="hintSel hide">
+						
+					</select>
+					<select name="" id="termHint" class="hintSel hide">
+						<option value="">请选择学期</option>
+					</select>
+					<a href="javascript:;" class="qCNameBtn hide hint1">学年查询</a>
+					<a href="javascript:;" class="termBtn hide hint1">学期查询</a>
+					<a href="javascript:;" class="qAllBtn hint1 ">在校成绩查询</a>
+					<a href="javascript:;" class="qNoPass hint1">未通过课程查询</a>
+				</label>
+				<div class="qResult">
+					<table class="rTable">
+							<thead>
+								<tr class="tableTile">
+									<th>学年</th>
+									<th>学期</th>
+									<th>课程代码</th>
+									<th>课程课程名称</th>
+									<th>课程性质</th>
+									<th>课程归属</th>
+									<th>学分</th>
+									<th>绩点</th>
+									<th>成绩</th>
+									<th>补考成绩</th>
+									<th>学院名称</th>
+									<th>重修标记</th>
+								</tr>
+							</thead>
+							<tbody class="tContent">
+								<!-- <tr class="tableContentItem">
+									<td>
+										<span>dfasdfa</span>
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td class="handle">
+										<a href="javascript:;" class="add">添加</a>
+									</td>
+								</tr> -->
+							</tbody>
+						</table>
+					</div>
+					<div class="qResultHint hintBox hide">
+						<h3 class="hintText"></h3>
+					</div>
+			</div>
+
+			<!-- 成绩修改模块 -->
+			<div id="studentAccountManageCnt" class="navCntItem hide">
+			<!-- 	<select id="cName" class='hintSel hide'>
+					<option value="">请选择班级</option>
+				</select>
+				<select name="" id="cNameHint" class="hintSel">
+					<option value="">请选择班级</option>}
+				</select>
+				<a href="javascript:;" class="qCNameBtn hide hint1">确定</a>
+
+				
+				<div class="qResult">
+					<table class="rTable">
+							<thead>
+								<tr class="tableTile">
+									<th>课程编号</th>
+									<th>课程名称</th> -->
+									<!-- <th>班级编号</th> -->
+							<!-- 		<th>班级名称</th>
+									<th>学生学号</th>
+									<th>学生姓名</th>
+									<th>学生成绩</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody class="tContent">
+								<tr class="tableContentItem">
+									<td>
+										<span>dfasdfa</span>
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+									</td>
+									<td>
+										<input type="text" name="" value="dfasdfsadfasfd">
+									</td>
+									<td class="handle">
+										<a href="javascript:;" class="add">添加</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div> -->
+					<div class="qResultHint hintBox hide">
+						<h3 class="hintText"></h3>
+					</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

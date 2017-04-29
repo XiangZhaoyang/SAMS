@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>课程管理</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+	<link rel="stylesheet" href="/static/css/user/student/course.css">
+	<script type="text/javascript" src="/static/js/jquery.js"></script>
+	<script type="text/javascript" src="/static/js/user/student/course.js"></script>
+</head>
+<body onselectstart="return false;">
+	<div id="container">
+		<div id="nav"  onselectstart="return false;">
+			<a href="javascript:;" class="studentCourseInf navItem select">课程查询</a>
+		</div>
+		<div id="content">
+			<!-- 成绩表生成模块 -->
+			<div id="studentCourseCnt" class="navCntItem">
+				<div class="qResultHint hintBox hide">
+					<h3 class="hintText"></h3>
+				</div>
+				<label class="hint qCNameHint">
+					<select id="cName" class='hintSel hide'>
+						<!-- <option value=""></option> -->
+					</select>
+					<select name="" id="cNameHint" class="hintSel">
+						<option value="">请选择查询学年</option>}
+					</select>
+					<a href="javascript:;" class="qCNameBtn hide hint1">确定</a>
+					<a href="javascript:;" class="qAllBtn hint1">全部课程查询</a>
+				</label>
+				<!-- 查询结果显示 -->
+				<div class="qResult">
+					<table class="rTable">
+						<thead>
+							<tr class="tableTile">
+								<th>课程编号</th>
+								<th>课程名称</th>
+								<th>课程院系</th>
+								<th>课程类型</th>
+								<th>任课教师</th>
+								<th>课程学分</th>
+								<th>课程学年</th>
+								<th>课程学期</th>
+							</tr>
+						</thead>
+						<tbody class="tContent">
+							<!-- <tr class="tableContentItem">
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf" class="select">
+								</td>
+								<td>
+									<input type="text" name="" value="dfasdfsadfasfd">
+								</td>
+								<td>
+									<input type=".rTable .tContent tr:hover" name="" value="dfadfasdfsdaf">
+								</td>
+								<td>
+								<td class="handle">
+									<a href="javascript:;" class="modify">修改</a>
+									<a href="javascript:;" class="delete">删除</a>
+								</td>
+							</tr> -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

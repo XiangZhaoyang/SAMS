@@ -95,6 +95,7 @@ return [
 
     '[user/student]'            => [
         '/reSetPass/:pass/:newpass' => ['user/student/reSetPass', ['method' => 'put']],
+        '/queryCourseByYear/:year' => ['user/student/queryCourseByYear', ['method' => 'get']]
     ],
 
     '[user/teacher]'            => [
