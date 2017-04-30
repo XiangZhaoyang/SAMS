@@ -65,6 +65,10 @@ return [
         '/indexScoreByCid/:courseid' => ['api/score/indexScoreByClassesIdNoAdd', ['method' => 'get']],
         '/addSoreByClasses/:courseid' => ['api/score/addSoreByClasses', ['method' => 'put']],
         'indexScoreByCidAdd/:courseid' => ['api/score/indexScoreByClassesIdAdd', ['method' => 'get']],
+        '/indexSecondScoreByCid/:courseid' => ['api/score/indexSecondScoreByClassesIdNoAdd', ['method' => 'get']],
+        '/addSecondSoreByClasses/:courseid' => ['api/score/addSecondSoreByClasses', ['method' => 'put']],
+        '/indexSecondScoreByCidAdd/:courseid' => ['api/score/indexSecondScoreByClassesIdAdd', ['method' => 'get']],
+        '/updateSecond/:sid/:cid' => ['qpi/score/updateSecond', ['method' => 'put']],
     ],
 
     '[api/student]'           => [
@@ -95,13 +99,16 @@ return [
 
     '[user/student]'            => [
         '/reSetPass/:pass/:newpass' => ['user/student/reSetPass', ['method' => 'put']],
-        '/queryCourseByYear/:year' => ['user/student/queryCourseByYear', ['method' => 'get']]
+        '/queryCourseByYear/:year' => ['user/student/queryCourseByYear', ['method' => 'get']],
+        '/queryScoreByTerm/:year/:term' => ['user/student/queryScoreByTerm', ['method' => 'get']],
+        '/queryScoreByYear/:year' => ['user/student/queryScoreByYear', ['method' => 'get']],
+        
     ],
 
     '[user/teacher]'            => [
         '/reSetPass/:pass/:newpass' => ['user/teacher/reSetPass', ['method' => 'put']],
         '/courseIndexByCid/:cid/:year/:term' => ['user/teacher/courseIndexByClassesId', ['method' => 'get']],
-        '/courseIndex/:year/:term' => ['user/teacher/courseIndex', ['method' => 'get']]
+        '/courseIndex/:year/:term' => ['user/teacher/courseIndex', ['method' => 'get']],
     ],
 
     // '[user/index]'              => [

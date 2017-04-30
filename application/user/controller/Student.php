@@ -106,7 +106,8 @@ class Student extends Controller
 		return $this->fetch();
 	}
 
-	//根据学年查询学生成绩
+
+	//根据学年查询学生课程
 	public function queryCourseByYear($year)
 	{
 		$ulogin = ulogin();
@@ -122,13 +123,13 @@ class Student extends Controller
 		$str = 'select course.course_id, course.course_name, course.course_credit, course.course_year,course.course_term,course.course_style,department.department_name, teacher.teacher_name from course, teacher, department where course.course_teacher_id = teacher.teacher_id and course.course_department_id = department.department_id and course.course_classes_id =? and course.course_year=?';
 		$list = Db::query($str, [$classesId, $year]);
 		if ($list) {
-			return json_return($list, '学生成绩列表查询成功', 1);
+			return json_return($list, '课程列表查询成功', 1);
 		} else {
-			return json_return(null, '学生成绩列表查询失败', 0);
+			return json_return(null, '课程列表查询失败', 0);
 		}
 	}
 
-	//查询学生全部成绩
+	//查询学生全部课程
 	public function queryCourse()
 	{
 		$ulogin = ulogin();
@@ -144,11 +145,12 @@ class Student extends Controller
 		$str = 'select course.course_id, course.course_name, course.course_credit, course.course_year,course.course_term,course.course_style,department.department_name, teacher.teacher_name from course, teacher, department where course.course_teacher_id = teacher.teacher_id and course.course_department_id = department.department_id and course.course_classes_id =?';
 		$list = Db::query($str, [$classesId]);
 		if ($list) {
-			return json_return($list, '学生成绩列表查询成功', 1);
+			return json_return($list, '课程列表查询成功', 1);
 		} else {
-			return json_return(null, '学生成绩列表查询失败', 0);
+			return json_return(null, '课程列表查询失败', 0);
 		}
 	}
+
 
 	//student成绩管理
 	public function score()
@@ -156,4 +158,93 @@ class Student extends Controller
 		$this->isLogin();
 		return $this->fetch();
 	}
+
+	//根据学期查询学生成绩
+	public function queryScoreByTerm($year, $term)
+	{
+		$ulogin = ulogin();
+		if (!$ulogin) {
+			return json_return(null, '用户未登录， 信息操作失败', 0);
+		}
+		if ($ulogin['userAuth'] != 3) {
+			return json_return(null, '用户权限不够，信息操作失败', 0);
+		}
+		$sid = $ulogin['userId'];
+		$classes = Db::table('student')->where('student_id', $sid)->select();
+		$classesId = $classes[0]['student_classes_id'];
+		$str = 'select course.course_year, course.course_term, course.course_id, course.course_name, course.course_style, course.course_belong, course.course_credit, score.score_gpa, score.score_score, score.score_second, department.department_name, course.course_rebuild from score,course, department where course.course_id = score.score_course_id and course.course_department_id = department.department_id and course.course_classes_id=? and score.score_student_id =? and course.course_year = ? and course.course_term =?';
+		$list = Db::query($str, [$classesId, $sid, $year, $term]);
+		if ($list) {
+			return json_return($list, '成绩查询成功', 1);
+		} else {
+			return json_return(null, '成绩查询失败', 0);
+		}
+	}
+
+	//根据学年查询学生成绩
+	public function queryScoreByYear($year)
+	{
+		$ulogin = ulogin();
+		if (!$ulogin) {
+			return json_return(null, '用户未登录， 信息操作失败', 0);
+		}
+		if ($ulogin['userAuth'] != 3) {
+			return json_return(null, '用户权限不够，信息操作失败', 0);
+		}
+		$sid = $ulogin['userId'];
+		$classes = Db::table('student')->where('student_id', $sid)->select();
+		$classesId = $classes[0]['student_classes_id'];
+		$str = 'select course.course_year, course.course_term, course.course_id, course.course_name, course.course_style, course.course_belong, course.course_credit, score.score_gpa, score.score_score, score.score_second, department.department_name, course.course_rebuild from score,course, department where course.course_id = score.score_course_id and course.course_department_id = department.department_id and course.course_classes_id=? and score.score_student_id =? and course.course_year = ? ';
+		$list = Db::query($str, [$classesId, $sid, $year]);
+		if ($list) {
+			return json_return($list, '成绩列表查询成功', 1);
+		} else {
+			return json_return(null, '成绩列表查询失败', 0);
+		}
+	}
+
+	//查询全部在校成绩
+	public function queryScore()
+	{
+		$ulogin = ulogin();
+		if (!$ulogin) {
+			return json_return(null, '用户未登录， 信息操作失败', 0);
+		}
+		if ($ulogin['userAuth'] != 3) {
+			return json_return(null, '用户权限不够，信息操作失败', 0);
+		}
+		$sid = $ulogin['userId'];
+		$classes = Db::table('student')->where('student_id', $sid)->select();
+		$classesId = $classes[0]['student_classes_id'];
+		$str = 'select course.course_year, course.course_term, course.course_id, course.course_name, course.course_style, course.course_belong, course.course_credit, score.score_gpa, score.score_score, score.score_second, department.department_name, course.course_rebuild from score,course, department where course.course_id = score.score_course_id and course.course_department_id = department.department_id and course.course_classes_id=? and score.score_student_id =? ';
+		$list = Db::query($str, [$classesId, $sid]);
+		if ($list) {
+			return json_return($list, '成绩列表查询成功', 1);
+		} else {
+			return json_return(null, '成绩列表查询失败', 0);
+		}
+	}
+
+	//查询未通过课程
+	public function queryScoreNoPass()
+	{
+		$ulogin = ulogin();
+		if (!$ulogin) {
+			return json_return(null, '用户未登录， 信息操作失败', 0);
+		}
+		if ($ulogin['userAuth'] != 3) {
+			return json_return(null, '用户权限不够，信息操作失败', 0);
+		}
+		$sid = $ulogin['userId'];
+		$classes = Db::table('student')->where('student_id', $sid)->select();
+		$classesId = $classes[0]['student_classes_id'];
+		$str = 'select course.course_year, course.course_term, course.course_id, course.course_name, course.course_style, course.course_belong, course.course_credit, score.score_gpa, score.score_score, score.score_second, department.department_name, course.course_rebuild from score,course, department where course.course_id = score.score_course_id and course.course_department_id = department.department_id and course.course_classes_id=? and score.score_student_id =? and score.score_pass = 0';
+		$list = Db::query($str, [$classesId, $sid]);
+		if ($list) {
+			return json_return($list, '成绩列表查询成功', 1);
+		} else {
+			return json_return(null, '没有未通过的课程', 0);
+		}
+	}
+
 }
