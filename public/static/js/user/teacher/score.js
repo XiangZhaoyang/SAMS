@@ -729,7 +729,7 @@ $(function(){
 		var that = event.target;
 		//如果内容改变
 		var index = that.getAttribute('item');
-		var reg = /^(\d{1,2}(\.\d)?)$|^(\d{1,2})$|^(100)$/;
+		var reg = /^[1-5]\d(\.\d)?$|(60)$|^[0-9]$/;
 		if (!reg.test(that.value)) {
 			scoreObj[index].valueTF = false;
 			scoreObj[index].valhas = true;
@@ -1060,7 +1060,7 @@ $(function($) {
 		var index = that.getAttribute('item');
 		scoreObj[index].change = true;
 		scoreObj[index]['data'][that.classList[0]] = that.value;
-		var reg = /^[1-5]\d(\.\d)?$|(60)$/;
+		var reg = /^[1-5]\d(\.\d)?$|(60)$|^[0-9]$/;
 		if (!reg.test(that.value)) {
 			scoreObj[index].valueTF = false;
 			scoreObj[index].valhas = true;
@@ -1135,7 +1135,7 @@ $(function($) {
 		.done(function() {
 			console.log("success");
 		});
-		console.log(url);
+		console.log(data);
 		return $req;
 	}
 

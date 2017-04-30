@@ -68,7 +68,7 @@ return [
         '/indexSecondScoreByCid/:courseid' => ['api/score/indexSecondScoreByClassesIdNoAdd', ['method' => 'get']],
         '/addSecondSoreByClasses/:courseid' => ['api/score/addSecondSoreByClasses', ['method' => 'put']],
         '/indexSecondScoreByCidAdd/:courseid' => ['api/score/indexSecondScoreByClassesIdAdd', ['method' => 'get']],
-        '/updateSecond/:sid/:cid' => ['qpi/score/updateSecond', ['method' => 'put']],
+        '/updateSecond/:sid/:cid' => ['api/score/updateSecond', ['method' => 'put']],
     ],
 
     '[api/student]'           => [
